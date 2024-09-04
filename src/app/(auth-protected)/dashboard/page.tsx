@@ -92,7 +92,7 @@ export default function DashboardPage() {
         <Card className="flex flex-col items-center justify-center h-64 border-dashed border-gray-300 rounded-xl">
           <CardContent className="text-center">
             <h3 className="text-2xl font-bold tracking-tight mb-2">
-              You haven't added any venues yet
+              {"You haven't added any venues yet"}
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
               Add your first restaurant, bar, or hotel to get started.

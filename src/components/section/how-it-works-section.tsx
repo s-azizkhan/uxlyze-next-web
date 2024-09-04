@@ -194,8 +194,7 @@ export default function HowItWorksSection() {
                 Ready to elevate your designs?
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                Join thousands of designers who've transformed their workflow
-                with our AI-powered platform.
+                {"Join thousands of designers who've transformed their workflow with our AI-powered platform."}
               </p>
             </div>
             <Button

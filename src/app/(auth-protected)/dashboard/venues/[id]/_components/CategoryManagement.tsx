@@ -317,7 +317,7 @@ function DeleteCategoryModal({
         <DialogHeader>
           <DialogTitle>Delete Category</DialogTitle>
         </DialogHeader>
-        <p>Are you sure you want to delete the category "{category.title}"?</p>
+        <p>{`Are you sure you want to delete the category "${category.title}"?`}</p>
         <div className="flex justify-end space-x-2">
           <Button variant="outline" onClick={onClose}>
             Cancel

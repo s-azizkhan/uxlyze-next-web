@@ -106,10 +106,9 @@ export default function SmartUserInterfacePage() {
               Transform Your Digital Presence
             </h3>
             <p className="text-gray-600 dark:text-gray-300">
-              In today's competitive digital landscape, providing a superior
-              user experience is crucial. Our Smart User Interface leverages
-              cutting-edge AI to create a dynamic, personalized experience that
-              adapts to each user's preferences and behaviors in real-time.
+              {
+                "In today's competitive digital landscape, providing a superior user experience is crucial. Our Smart User Interface leverages cutting-edge AI to create a dynamic, personalized experience that adapts to each user's preferences and behaviors in real-time."
+              }
             </p>
             <Button size="lg" className="rounded-xl">
               Start Free Trial
