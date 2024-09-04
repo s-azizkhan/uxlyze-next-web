@@ -25,7 +25,12 @@ import {
 } from "@/components/ui/accordion";
 import { ModeToggle } from "@/components/mode-toggle";
 import Link from "next/link";
-import { AiImageIcon } from "hugeicons-react";
+import {
+  AiImageIcon,
+  CustomizeIcon,
+  GitCompareIcon,
+  InvestigationIcon,
+} from "hugeicons-react";
 import { APP_NAME } from "@/config/app.config";
 
 const navbarContent = {
@@ -33,38 +38,44 @@ const navbarContent = {
   mainLinks: [
     { title: "Features", href: "/features" },
     { title: "Pricing", href: "/pricing" },
-    { title: "Blog", href: "/blogs" },
+    { title: "Case Studies", href: "/case-studies" },
   ],
   resourcesMenu: [
     {
-      title: "Help Center",
-      description: "Get all the answers you need right here",
-      icon: <Zap className="size-5 shrink-0" />,
-      href: "/help-center",
+      title: "AI-Powered Evaluation",
+      description: "Automate your UI/UX analysis with advanced AI algorithms",
+      icon: <AiImageIcon className="size-5 shrink-0" />,
+      href: "/features/ai-evaluation",
     },
     {
-      title: "Contact Us",
-      description: "We are here to help you with any questions you have",
-      icon: <Sunset className="size-5 shrink-0" />,
-      href: "/contact",
+      title: "Figma to Website Comparison",
+      description: "Compare designs to live websites with precision",
+      icon: <GitCompareIcon className="size-5 shrink-0" />,
+      href: "/features/design-comparison",
     },
     {
-      title: "Terms of Service",
-      description: "Our terms and conditions for using our services",
-      icon: <Book className="size-5 shrink-0" />,
-      href: "#",
+      title: "Easy Integration",
+      description: "Seamlessly integrate with your existing workflow",
+      icon: <InvestigationIcon className="size-5 shrink-0" />,
+      href: "/features/integration",
+    },
+    {
+      title: "Customization Options",
+      description: "Tailor the platform to your specific needs",
+      icon: <CustomizeIcon className="size-5 shrink-0" />,
+      href: "/features/customization",
     },
   ],
   ctaButton: {
-    text: "Generate Menu",
+    text: "Start Free Trial",
     href: "/register",
-    icon: <AiImageIcon className="size-4 ml-2" />,
+    icon: <Zap className="size-4 ml-2" />,
   },
   mobileMenuFooter: [
-    { title: "Press", href: "#" },
+    { title: "Blog", href: "/blog" },
     { title: "Contact", href: "/contact" },
-    { title: "Imprint", href: "#" },
-    { title: "Sitemap", href: "#" },
+    { title: "Support", href: "/support" },
+    { title: "API Docs", href: "/api-docs" },
   ],
   loginButton: {
     text: "Log in",
@@ -80,9 +91,11 @@ const DesktopNavigation = () => {
       <div className="flex items-center gap-6">
         {/* Logo */}
         <Link href="/">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ">
             {/* TODO: add logo */}
-            <span className="text-xl font-bold">{navbarContent.appName}</span>
+            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              {navbarContent.appName}
+            </span>
           </div>
         </Link>
       </div>
@@ -108,26 +121,26 @@ const DesktopNavigation = () => {
             <NavigationMenuList>
               {/* Resources Menu */}
               <NavigationMenuItem className="text-muted-foreground">
-                <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Features</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-80 p-3">
+                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-2">
                     {navbarContent.resourcesMenu.map((item, idx) => (
                       <li key={idx}>
-                        <NavigationMenuLink
-                          href={item.href}
-                          className={cn(
-                            "flex items-start gap-4 rounded-md p-3 transition hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          )}
-                        >
-                          {item.icon}
-                          <div>
-                            <div className="text-sm font-semibold">
-                              {item.title}
+                        <NavigationMenuLink asChild>
+                          <a
+                            href={item.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="flex items-center gap-2">
+                              {item.icon}
+                              <div className="text-sm font-medium leading-none">
+                                {item.title}
+                              </div>
                             </div>
-                            <p className="text-sm leading-snug text-muted-foreground">
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               {item.description}
                             </p>
-                          </div>
+                          </a>
                         </NavigationMenuLink>
                       </li>
                     ))}
@@ -187,14 +200,14 @@ const MobileNavigation = () => {
             </SheetTitle>
           </SheetHeader>
           <div className="mb-8 mt-8 flex flex-col gap-4">
-            <a href="#" className="font-semibold">
+            <a href="/" className="font-semibold">
               Home
             </a>
-            {/* Accordion for Resources */}
+            {/* Accordion for Features */}
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="resources" className="border-b-0">
+              <AccordionItem value="features" className="border-b-0">
                 <AccordionTrigger className="py-0 font-semibold hover:no-underline bg-transparent">
-                  Resources
+                  Features
                 </AccordionTrigger>
                 <AccordionContent className="mt-2">
                   {navbarContent.resourcesMenu.map((item, idx) => (

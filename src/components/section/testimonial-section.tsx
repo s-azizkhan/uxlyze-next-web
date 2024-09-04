@@ -11,30 +11,31 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { APP_NAME } from "@/config/app.config";
+import TitleTopBadge from "../shared/title-top-badge";
 
 const testimonialsContent = [
   {
-    name: "Alex Johnson",
-    role: "Restaurant Owner",
-    company: "Bistro Bliss",
+    name: "Emily Chen",
+    role: "UX Designer",
+    company: "TechInnovate",
     image: "https://www.shadcnblocks.com/images/block/avatar-1.webp",
-    content: `"${APP_NAME} has transformed our restaurant operations. Our menu management is now seamless, and customer feedback has improved significantly!`,
+    content: `"${APP_NAME} has revolutionized our design process. The automated UI/UX evaluation saves us hours of manual work, and the Figma integration is seamless!"`,
     rating: 5,
   },
   {
-    name: "Sarah Lee",
-    role: "Café Manager",
-    company: "Brew & Chew",
+    name: "Alex Rodriguez",
+    role: "Product Manager",
+    company: "DesignWave",
     image: "https://www.shadcnblocks.com/images/block/avatar-2.webp",
-    content: `"As a small café, efficiency is key. ${APP_NAME}'s AI-powered system has streamlined our ordering process and boosted our overall productivity.`,
+    content: `"The real-time comparison between our Figma designs and live websites has dramatically improved our iteration speed. ${APP_NAME} is a game-changer for our team."`,
     rating: 5,
   },
   {
-    name: "Michael Chen",
-    role: "Head Chef",
-    company: "Fusion Flavors",
+    name: "Sarah Johnson",
+    role: "Frontend Developer",
+    company: "WebCraft Solutions",
     image: "https://www.shadcnblocks.com/images/block/avatar-3.webp",
-    content: `The AI menu suggestions from ${APP_NAME} have been a game-changer. It's helped us create innovative dishes that our customers love!`,
+    content: `"As a developer, I love how ${APP_NAME} bridges the gap between design and implementation. The customizable reports help us focus on what matters most for each project."`,
     rating: 4,
   },
 ];
@@ -72,7 +73,7 @@ function TestimonialCards() {
                 </div>
               </div>
               <MinimalCardDescription className="text-gray-700 dark:text-gray-300 mb-4">
-                {`"${testimonial.content}"`}
+                {testimonial.content}
               </MinimalCardDescription>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
@@ -115,11 +116,10 @@ export default function TestimonialSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="max-w-6xl mx-auto text-center"
           >
-            <span className="py-1.5 px-5 bg-indigo-100 dark:bg-indigo-900 rounded-full text-xs font-semibold text-indigo-600 dark:text-indigo-300 text-center inline-block mb-4 transition-all duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-800">
-              {`Why ${APP_NAME}?`}
-            </span>
+            <TitleTopBadge title={`Why ${APP_NAME}?`} />
+
             <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              The Dining Revolution: Customer Stories
+              Revolutionizing UI/UX Evaluation
             </h2>
             <div className="flex flex-col justify-center items-center">
               <span className="relative inline-flex justify-center -space-x-4">
@@ -144,8 +144,9 @@ export default function TestimonialSection() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
               >
-                Join us as we witness the transformation of the dining industry
-                through the power of our AI-powered solutions.
+                Discover how our AI-powered platform is transforming the design
+                process with automated UI/UX evaluation, seamless Figma
+                integration, and real-time website comparisons.
               </motion.p>
             </div>
           </motion.div>

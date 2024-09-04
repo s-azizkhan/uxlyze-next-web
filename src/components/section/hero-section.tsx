@@ -13,17 +13,17 @@ import Image from "next/image";
 import WaitListForm from "../shared/wait-list-form";
 
 const heroSectionContent = {
-  leftImage: "https://illustrations.popsy.co/violet/chef-serving-food.svg",
-  rightImage: "https://illustrations.popsy.co/violet/woman-eating-salad.svg",
+  leftImage: "https://illustrations.popsy.co/violet/graphic-design.svg",
+  rightImage: "https://illustrations.popsy.co/violet/web-design.svg",
   linkUrl: "/register",
-  linkText: "Introducing AI menu ✨",
-  linkCta: "Join now",
-  title: "Extend your hospitality",
+  linkText: "New: AI-Powered UX Analysis ✨",
+  linkCta: "Try Now",
+  title: "Elevate Your Design Process",
   subtitle: `with ${APP_NAME} AI`,
-  description: `${APP_NAME} is a cutting-edge platform that revolutionizes your hospitality experience, making it effortless to create stunning digital menus and enhance customer engagement.`,
-  buttonText: "Explore Features",
-  rating: 4.0,
-  testimonial: "from 200+ satisfied Hotels , Cafes & Restaurants",
+  description: `${APP_NAME} is an innovative platform that revolutionizes UI/UX evaluation. Automatically compare Figma designs to live websites, get instant insights, and streamline your design workflow with our easy-to-use tools and AI-powered analysis.`,
+  buttonText: "See How It Works",
+  rating: 4.8,
+  testimonial: "from 500+ satisfied designers & developers",
   avatars: [
     {
       src: "https://www.shadcnblocks.com/images/block/avatar-1.webp",
@@ -64,7 +64,7 @@ export default function HeroSection() {
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
           <Image
             src={heroSectionContent.leftImage}
-            alt="Decorative image"
+            alt="UX designer working"
             className="w-96 h-auto dark:hidden"
             loading="lazy"
             width={1000}
@@ -74,7 +74,7 @@ export default function HeroSection() {
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
           <Image
             src={heroSectionContent.rightImage}
-            alt="Decorative image"
+            alt="Web developer coding"
             className="w-96 h-auto dark:hidden"
             loading="lazy"
             width={1000}
@@ -84,7 +84,7 @@ export default function HeroSection() {
         <div className="absolute left-0 top-0 lg:hidden">
           <Image
             src={heroSectionContent.leftImage}
-            alt="Decorative image"
+            alt="UX designer working"
             className="w-32 h-auto opacity-70 dark:hidden"
             loading="lazy"
             width={1000}
@@ -94,7 +94,7 @@ export default function HeroSection() {
         <div className="absolute right-0 bottom-0 lg:hidden">
           <Image
             src={heroSectionContent.rightImage}
-            alt="Decorative image"
+            alt="Web developer coding"
             className="w-32 h-auto opacity-70 dark:hidden"
             loading="lazy"
             width={1000}
@@ -111,7 +111,7 @@ export default function HeroSection() {
       >
         <Image
           src={heroSectionContent.rightImage}
-          alt="Decorative image"
+          alt="Web developer coding"
           className="w-32 h-auto opacity-70 dark:hidden"
           loading="lazy"
           width={1000}
@@ -166,7 +166,7 @@ export default function HeroSection() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="mt-3 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
-            <Link href="#feature-section">
+            <Link href="#how-it-works-section">
               <Button
                 variant="outline"
                 size="lg"
@@ -195,13 +195,12 @@ export default function HeroSection() {
             </span>
             <div className="flex flex-col items-center md:items-start">
               <div className="flex items-center gap-1">
-                {[...Array(4)].map((_, index) => (
+                {[...Array(5)].map((_, index) => (
                   <StarIcon
                     key={index}
                     className="size-4 sm:size-6 fill-yellow-400 text-yellow-400"
                   />
                 ))}
-                <StarIcon className="size-4 sm:size-6 fill-gray-300 text-gray-300" />
                 <span className="ml-2 text-lg sm:text-xl font-bold">
                   {heroSectionContent.rating}
                 </span>

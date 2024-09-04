@@ -2,105 +2,89 @@
 import { SparklesIcon } from "hugeicons-react";
 import {
   IconAdjustmentsBolt,
-  IconCloud,
-  IconCurrencyDollar,
-  IconEaseInOut,
-  IconHeart,
-  IconHelp,
-  IconRouteAltLeft,
-  IconTerminal2,
+  IconEye,
+  IconPuzzle,
+  IconBrandFigma,
   IconRobot,
   IconBrain,
-  IconChartInfographic,
+  IconEaseInOut,
   IconDeviceAnalytics,
+  IconRocket,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "../shared/max-width-wrapper";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
+import React, { useRef } from "react";
+import TitleTopBadge from "../shared/title-top-badge";
 
 const featureSectionContent = {
   features: [
     {
-      title: "AI-Powered Menu",
-      description:
-        "Generate a menu for your restaurant with AI by just uploading a picture of your menu.",
-      href: "/features/ai-menu",
-      icon: <IconRobot />,
-    },
-    {
-      title: "Smart User Interface",
-      description:
-        "Enhance customer experience with our AI-driven, adaptive menu design that learns from user interactions.",
-      href: "/features/smart-user-interface",
-      icon: <IconEaseInOut />,
-    },
-    {
-      title: "Dynamic Pricing",
-      description:
-        "Utilize AI algorithms to optimize pricing strategies based on demand, inventory, and market trends.",
-      href: "/features/dynamic-pricing",
-      icon: <IconCurrencyDollar />,
-    },
-    {
-      title: "AI-Enhanced Performance",
-      description:
-        "Ensure smooth operations with our AI-powered platform that predicts and prevents potential issues.",
-      href: "/features/ai-enhanced-performance",
-      icon: <IconCloud />,
-    },
-    {
-      title: "Intelligent Multi-Location Management",
-      description:
-        "Leverage AI to effortlessly manage multiple restaurant locations with automated insights and decision support.",
-      href: "#",
-      icon: <IconRouteAltLeft />,
-    },
-    {
-      title: "AI-Assisted Customer Support",
-      description:
-        "Get intelligent assistance with our AI-powered support system that learns and improves over time.",
-      href: "#",
-      icon: <IconHelp />,
-    },
-    {
-      title: "AI-Driven Customization",
-      description:
-        "Tailor your digital menu using AI that adapts to your restaurant's unique style and customer preferences.",
-      href: "#",
-      icon: <IconAdjustmentsBolt />,
-    },
-    {
-      title: "Continuous AI Learning",
-      description:
-        "Benefit from an AI system that continuously learns and evolves, keeping your menu system at the cutting edge.",
-      href: "#",
-      icon: <IconBrain />,
-    },
-    {
-      title: "Predictive Analytics",
-      description:
-        "Harness the power of AI to forecast trends, optimize inventory, and make data-driven decisions.",
-      href: "#",
-      icon: <IconChartInfographic />,
-    },
-    {
       title: "AI-Powered Insights",
       description:
-        "Gain deep insights into your operations with AI-driven analytics and visualizations.",
-      href: "#",
-      icon: <IconDeviceAnalytics />,
+        "Harness cutting-edge AI to instantly analyze UI/UX elements and generate actionable insights.",
+      href: "/features/ai-analysis",
+      icon: <IconRobot className="w-8 h-8 text-blue-500" />,
+    },
+    {
+      title: "Seamless Figma Sync",
+      description:
+        "Effortlessly compare Figma designs with live websites for pixel-perfect implementation.",
+      href: "/features/figma-integration",
+      icon: <IconBrandFigma className="w-8 h-8 text-purple-500" />,
+    },
+    {
+      title: "Real-time Visual Diff",
+      description:
+        "See design discrepancies in real-time for lightning-fast iterations and improvements.",
+      href: "/features/real-time-comparison",
+      icon: <IconEye className="w-8 h-8 text-green-500" />,
+    },
+    {
+      title: "Tailored Reports",
+      description:
+        "Generate custom reports focused on the metrics that matter most to your project's success.",
+      href: "/features/customizable-reports",
+      icon: <IconAdjustmentsBolt className="w-8 h-8 text-yellow-500" />,
+    },
+    {
+      title: "Frictionless Integration",
+      description:
+        "Integrate seamlessly into your workflow with our intuitive API and robust documentation.",
+      href: "/features/easy-integration",
+      icon: <IconPuzzle className="w-8 h-8 text-red-500" />,
+    },
+    {
+      title: "Adaptive AI Learning",
+      description:
+        "Our AI evolves with your design patterns, delivering increasingly precise feedback over time.",
+      href: "/features/adaptive-analysis",
+      icon: <IconBrain className="w-8 h-8 text-indigo-500" />,
+    },
+    {
+      title: "Accessibility Guardian",
+      description:
+        "Ensure inclusive design with automated WCAG compliance checks and recommendations.",
+      href: "/features/accessibility-checker",
+      icon: <IconEaseInOut className="w-8 h-8 text-teal-500" />,
+    },
+    {
+      title: "Trend Forecasting",
+      description:
+        "Stay ahead with AI-driven insights into emerging UI/UX trends and industry best practices.",
+      href: "/features/trend-analysis",
+      icon: <IconDeviceAnalytics className="w-8 h-8 text-pink-500" />,
     },
   ],
   heading: {
-    badge: "AI-Powered Features",
-    title: "The Future of Hospitality is Here",
-    subtitle: "with Advanced AI",
+    badge: "Next-Gen UX Analysis",
+    title: "Supercharge Your Design Workflow",
+    subtitle: "with AI-Powered Precision",
   },
   description:
-    "Discover how our AI-powered management system can transform your business. Enjoy enhanced efficiency, improved customer satisfaction, and unparalleled insights into your operations, all driven by cutting-edge artificial intelligence.",
+    "Experience the future of UI/UX evaluation. Our AI-driven platform automates design comparisons, delivers instant insights, and streamlines your entire workflow. Elevate your design process and consistently deliver exceptional user experiences.",
 };
 
 const Features = () => {
@@ -113,7 +97,7 @@ const Features = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, staggerChildren: 0.1 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 mx-auto"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 py-16"
     >
       {featureSectionContent.features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
@@ -142,30 +126,24 @@ const Feature = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className={cn(
-          "flex flex-col lg:border-r py-10 relative group/feature dark:border-neutral-800",
-          (index === 0 || index === 4 || index === 8) &&
-            "lg:border-l dark:border-neutral-800",
-          index < 8 && "lg:border-b dark:border-neutral-800"
+          "flex flex-col p-6 rounded-xl bg-white dark:bg-neutral-800 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer",
+          "transform hover:-translate-y-2"
         )}
       >
-        {index < 8 && (
-          <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
-        )}
-        {index >= 8 && (
-          <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
-        )}
-        <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
+        <div className="mb-4 text-primary dark:text-primary-light transition-colors duration-300 group-hover:text-secondary">
           {icon}
         </div>
-        <div className="text-lg font-bold mb-2 relative z-10 px-10">
-          <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-[#8730DA] transition-all duration-200 origin-center" />
-          <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
-            {title}
-          </span>
-        </div>
-        <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
+        <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+          {title}
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors duration-300">
           {description}
         </p>
+        {/* TODO: Add this back in */}
+        <div className="mt-4 flex items-center text-primary dark:text-primary-light text-opacity-80 group-hover:text-opacity-100 transition-colors duration-300 hidden">
+          <span className="text-sm font-semibold">Learn more</span>
+          <IconRocket className="w-4 h-4 ml-2 animate-pulse" />
+        </div>
       </motion.div>
     </Link>
   );
@@ -182,7 +160,7 @@ export default function FeatureSection() {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
-        className="py-14"
+        className="py-20"
         id="feature-section"
       >
         <div className="container mx-auto px-4">
@@ -190,12 +168,10 @@ export default function FeatureSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center lg:mb-5"
+            className="text-center mb-16"
           >
-            <span className="py-1.5 px-5 bg-indigo-100 dark:bg-indigo-900 rounded-full text-xs font-semibold text-indigo-600 dark:text-indigo-300 text-center inline-block mb-4 transition-all duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-800">
-              {featureSectionContent.heading.badge}
-            </span>
-            <h2 className="text-3xl font-extrabold sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-white mb-6 sm:mb-8">
+            <TitleTopBadge title={featureSectionContent.heading.badge} />
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={
@@ -215,14 +191,14 @@ export default function FeatureSection() {
                 className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent inline-flex items-center flex-wrap justify-center"
               >
                 {featureSectionContent.heading.subtitle}
-                <SparklesIcon className="size-6 sm:size-7 ml-2 text-purple-600 animate-pulse" />
+                <SparklesIcon className="w-10 h-10 ml-2 text-secondary animate-pulse" />
               </motion.span>
             </h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
               {featureSectionContent.description}
             </motion.p>

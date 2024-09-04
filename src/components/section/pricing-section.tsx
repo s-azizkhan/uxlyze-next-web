@@ -13,57 +13,57 @@ import { CircleCheck } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   ArrowRight01Icon,
-  Building01Icon,
-  Coffee01Icon,
-  Rocket01Icon,
   SparklesIcon,
+  RocketIcon,
+  Layout01Icon,
 } from "hugeicons-react";
 import MaxWidthWrapper from "../shared/max-width-wrapper";
 import { motion, useInView } from "framer-motion";
+import { APP_NAME } from "@/config/app.config";
+import TitleTopBadge from "../shared/title-top-badge";
 
 const pricingSectionContent = {
-  title: "Upgrade Your Restaurant with",
-  titleHighlight: "AI",
-  description:
-    "Choose the perfect plan to revolutionize your restaurant operations. Start your 30-day free trial today - no credit card required.",
+  title: "Elevate Your Design Process with",
+  titleHighlight: "AI-Powered UX Analysis",
+  description: `Choose the perfect plan to revolutionize your UI/UX workflow. Start your 14-day free trial of ${APP_NAME} today - no credit card required.`,
   plans: [
     {
       name: "Starter",
-      description: "Perfect for small cafes",
-      icon: <Coffee01Icon className="size-8 inline-flex text-indigo-600" />,
+      description: "For individuals and small teams",
+      icon: <Layout01Icon className="size-8 inline-flex text-indigo-600" />,
       features: [
-        "Basic AI menu suggestions",
-        "Simple order management",
-        "Customer feedback collection",
+        "Basic UI/UX evaluation",
+        "Figma to website comparison",
+        "5 projects per month",
         "Email support",
       ],
     },
     {
-      name: "Growth",
+      name: "Pro",
       isPopular: true,
-      description: "Ideal for growing restaurants",
-      icon: <Rocket01Icon className="size-8 inline-flex text-indigo-600" />,
+      description: "Ideal for growing design teams",
+      icon: <SparklesIcon className="size-8 inline-flex text-indigo-600" />,
       features: [
-        "Advanced AI menu optimization",
-        "Real-time order tracking",
-        "Detailed customer insights",
-        "24/7 priority support",
+        "Advanced AI-powered analysis",
+        "Unlimited Figma comparisons",
+        "Custom report generation",
+        "Priority support",
       ],
     },
     {
       name: "Enterprise",
-      description: "For multi-location chains",
-      icon: <Building01Icon className="size-8 inline-flex text-indigo-600" />,
+      description: "For large organizations",
+      icon: <RocketIcon className="size-8 inline-flex text-indigo-600" />,
       features: [
-        "Custom AI solutions",
-        "Multi-location management",
-        "Advanced analytics & reporting",
+        "Full-scale UX optimization",
+        "API access for integrations",
         "Dedicated account manager",
+        "Custom AI model training",
       ],
     },
   ],
   footer:
-    "All plans include a 30-day money-back guarantee and a free 30-day trial. Upgrade, downgrade, or cancel anytime.",
+    "All plans include a 14-day free trial. Upgrade, downgrade, or cancel anytime.",
 };
 
 const PricingSection = () => {
@@ -73,9 +73,9 @@ const PricingSection = () => {
 
   const getPricing = (planIndex: number) => {
     const prices = [
-      { monthly: 15, yearly: 12 },
-      { monthly: 35, yearly: 28 },
-      { monthly: 70, yearly: 56 },
+      { monthly: 29, yearly: 24 },
+      { monthly: 79, yearly: 64 },
+      { monthly: 199, yearly: 159 },
     ];
     const price = isYearly
       ? prices[planIndex].yearly
@@ -107,14 +107,13 @@ const PricingSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center"
           >
-            <span className="px-3 py-1 text-sm font-semibold text-indigo-600 bg-indigo-100 rounded-full dark:text-indigo-200 dark:bg-indigo-800">
-              Pricing Plans
-            </span>
+            <TitleTopBadge title="Pricing" />
+
             <h2 className="text-pretty text-4xl font-bold lg:text-6xl ">
               {pricingSectionContent.title}{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent inline-flex items-center flex-wrap justify-center">
                 {pricingSectionContent.titleHighlight}
-                <SparklesIcon className="size-8 inline-flex text-indigo-600 animate-pulse" />
+                <SparklesIcon className="size-8 inline-flex text-purple-600 animate-pulse" />
               </span>
             </h2>
             <p className="text-gray-600 dark:text-gray-300 lg:text-xl max-w-2xl">
@@ -131,7 +130,7 @@ const PricingSection = () => {
               <span
                 className={`transition-colors duration-200 ${
                   !isYearly
-                    ? "text-indigo-600 font-semibold"
+                    ? "text-purple-600 font-semibold"
                     : "text-gray-600 dark:text-gray-300"
                 }`}
               >
@@ -140,12 +139,12 @@ const PricingSection = () => {
               <Switch
                 onCheckedChange={() => setIsYearly(!isYearly)}
                 checked={isYearly}
-                className="data-[state=checked]:bg-indigo-600 dark:bg-white"
+                className="data-[state=checked]:bg-purple-600 dark:bg-white"
               />
               <span
                 className={`transition-colors duration-200 ${
                   isYearly
-                    ? "text-indigo-600 font-semibold"
+                    ? "text-purple-600 font-semibold"
                     : "text-gray-600 dark:text-gray-300"
                 }`}
               >
@@ -157,14 +156,14 @@ const PricingSection = () => {
                 <Card
                   key={index}
                   className={`flex w-full lg:w-1/3 flex-col justify-between text-left transition-all duration-300 hover:shadow-xl ${
-                    plan.name === "Growth"
-                      ? "border-2 border-indigo-600 shadow-lg"
+                    plan.name === "Pro"
+                      ? "border-2 border-purple-600 shadow-lg"
                       : ""
                   }`}
                 >
                   <CardHeader className="relative">
                     {plan.isPopular && (
-                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
                         Most Popular
                       </div>
                     )}
@@ -184,7 +183,7 @@ const PricingSection = () => {
                     <p className="text-sm text-muted-foreground mt-1">
                       Billed {getPricing(index).billingPeriod}
                     </p>
-                    <p className="text-sm text-indigo-600 font-semibold mt-2">
+                    <p className="text-sm text-purple-600 font-semibold mt-2">
                       Save {isYearly ? "20%" : "0%"} with annual billing
                     </p>
                   </CardHeader>
@@ -196,7 +195,7 @@ const PricingSection = () => {
                           key={featureIndex}
                           className="flex items-center gap-3"
                         >
-                          <CircleCheck className="size-5 text-indigo-600 flex-shrink-0" />
+                          <CircleCheck className="size-5 text-purple-600 flex-shrink-0" />
                           <span className="text-sm">{feature}</span>
                         </li>
                       ))}
@@ -206,8 +205,8 @@ const PricingSection = () => {
                     <Button
                       className={`w-full transition-all duration-300 ${
                         plan.isPopular
-                          ? "bg-indigo-600 hover:bg-indigo-700 text-white"
-                          : "bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-600"
+                          ? "bg-purple-600 hover:bg-purple-700 text-white"
+                          : "bg-white hover:bg-purple-50 text-purple-600 border border-purple-600"
                       }`}
                     >
                       {plan.isPopular ? "Get Started" : "Start Free Trial"}

@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { APP_NAME } from "@/config/app.config";
 
 const footerContent = {
-  tagline: "Extend your hospitality like never before.",
+  tagline: "Revolutionize your UI/UX workflow with automated design analysis.",
   sections: [
     {
       title: "Product",
@@ -22,31 +22,44 @@ const footerContent = {
         { name: "Pricing", href: "/pricing" },
         { name: "Features", href: "/features" },
         { name: "Integrations", href: "#" },
+        { name: "API", href: "/api" },
       ],
     },
     {
-      title: "Company",
+      title: "Solutions",
       links: [
-        { name: "About", href: "#" },
-        { name: "Team", href: "#" },
-        { name: "Blog", href: "#" },
-        { name: "Careers", href: "#" },
-        { name: "Contact", href: "/contact" },
-        { name: "Privacy", href: "#" },
+        { name: "UI Evaluation", href: "/solutions/ui-evaluation" },
+        { name: "UX Analysis", href: "/solutions/ux-analysis" },
+        { name: "Design Comparison", href: "/solutions/design-comparison" },
+        { name: "Figma Integration", href: "/solutions/figma-integration" },
+        { name: "Website Analysis", href: "/solutions/website-analysis" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { name: "Help", href: "#" },
-        { name: "Sales", href: "#" },
-        { name: "Advertise", href: "#" },
+        { name: "Documentation", href: "/docs" },
+        { name: "Tutorials", href: "/tutorials" },
+        { name: "Blog", href: "/blog" },
+        { name: "Case Studies", href: "/case-studies" },
+        { name: "Support", href: "/support" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "About Us", href: "/about" },
+        { name: "Team", href: "/team" },
+        { name: "Careers", href: "/careers" },
+        { name: "Contact", href: "/contact" },
+        { name: "Partners", href: "/partners" },
       ],
     },
   ],
   legal: [
-    { name: "Terms of Service", href: "#" },
-    { name: "Privacy Policy", href: "#" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Cookie Policy", href: "/cookie-policy" },
   ],
   socialIcons: [FaDiscord, FaRedditAlien, FaTwitter, FaTelegramPlane],
 };
@@ -140,27 +153,21 @@ export default function PageFooter() {
                   </li>
                 ))}
               </ul>
-              <h3 className="mb-4 mt-8 text-lg font-bold text-gray-800 dark:text-gray-200">
-                Social
-              </h3>
-              <ul className="flex space-x-4 text-gray-600 dark:text-gray-400 items-center">
-                {footerContent.socialIcons.map((Icon, idx) => (
-                  <li
-                    key={idx}
-                    className="transition-transform hover:scale-110"
-                  >
-                    <a href="#" className="text-gray-400 hover:text-primary">
-                      <Icon className="size-6" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
           <Separator className="my-10" />
-          <p className="text-sm text-center text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} {APP_NAME}. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center mb-2">
+            <div className="flex gap-4">
+              {footerContent.socialIcons.map((Icon, idx) => (
+                <Link key={idx} href="#">
+                  <Icon className="size-6 text-gray-500 dark:text-gray-400" />
+                </Link>
+              ))}
+            </div>
+            <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+              © {new Date().getFullYear()} {APP_NAME}. All rights reserved.
+            </p>
+          </div>
         </footer>
       </div>
     </motion.section>

@@ -7,6 +7,7 @@ import FaqSection from "../components/section/faq-section";
 import GenerateMenuCtaSection from "../components/section/generate-menu-cta-section";
 import PageNavbar from "@/components/shared/page-navbar";
 import PageFooter from "@/components/shared/page-footer";
+import HowItWorksSection from "@/components/section/how-it-works-section";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <PageNavbar />
       <main>
         <HeroSection />
+        <HowItWorksSection />
         <FeatureSection />
         <TestimonialSection />
         <PricingSection />

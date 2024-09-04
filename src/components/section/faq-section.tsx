@@ -12,28 +12,37 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { APP_NAME } from "@/config/app.config";
+import TitleTopBadge from "../shared/title-top-badge";
 
 const defaultFaqSectionContent = {
   faqs: [
     {
       question: `What is ${APP_NAME}?`,
-      answer: `${APP_NAME} is an AI-powered restaurant management system that streamlines menu creation, order processing, and customer feedback analysis.`,
+      answer: `${APP_NAME} is an AI-powered platform that automates UI/UX evaluation and design comparison between Figma files and live websites. It streamlines the design process, enhances collaboration, and provides actionable insights for designers and developers.`,
     },
     {
-      question: `How does ${APP_NAME} benefit my restaurant?`,
-      answer: `${APP_NAME} enhances operational efficiency, improves customer satisfaction, and provides data-driven insights to optimize your menu and service.`,
+      question: `How does ${APP_NAME} compare Figma designs to live websites?`,
+      answer: `${APP_NAME} uses advanced AI algorithms to analyze both your Figma designs and live websites. It compares elements such as layout, color schemes, typography, and interactive components, providing a detailed report of similarities, differences, and potential improvements.`,
     },
     {
-      question: `Is ${APP_NAME} suitable for all types of restaurants, bars, and cafes?`,
-      answer: `Yes, ${APP_NAME} is designed to cater to various restaurant sizes and types, from small cafes to large multi-location chains.`,
+      question: `Can ${APP_NAME} integrate with my existing workflow?`,
+      answer: `Absolutely! ${APP_NAME} offers easy integration options, including a Figma plugin and API access. This allows you to seamlessly incorporate our platform into your current design and development processes without disrupting your workflow.`,
     },
     {
-      question: `How easy is it to implement ${APP_NAME} in my restaurant?`,
-      answer: `${APP_NAME} offers a user-friendly setup process with dedicated support to ensure a smooth integration into your existing operations.`,
+      question: `What kind of customization options does ${APP_NAME} offer?`,
+      answer: `${APP_NAME} provides extensive customization options. You can tailor analysis parameters, create custom report templates, and set specific evaluation criteria based on your project requirements. This flexibility ensures that ${APP_NAME} adapts to your unique needs and design standards.`,
+    },
+    {
+      question: `How does ${APP_NAME} help improve my design process?`,
+      answer: `${APP_NAME} accelerates your design process by automating comparisons, providing instant feedback, and highlighting areas for improvement. This leads to faster iterations, better consistency between designs and implementations, and ultimately, a superior user experience for your products.`,
+    },
+    {
+      question: `Is ${APP_NAME} suitable for both small teams and large enterprises?`,
+      answer: `Yes, ${APP_NAME} is designed to scale with your needs. Whether you're a small startup or a large enterprise, our platform offers plans and features that cater to teams of all sizes. From individual designers to large, distributed teams, ${APP_NAME} enhances collaboration and efficiency.`,
     },
   ],
   title: "Frequently Asked Questions",
-  description: `Get quick answers to common questions about ${APP_NAME} and discover how it can revolutionize your restaurant operations.`,
+  description: `Discover how ${APP_NAME} can revolutionize your UI/UX workflow with automated design evaluation and comparison. Get answers to common questions about our platform's features, integration, and benefits.`,
 };
 
 export default function FaqSection({
@@ -60,9 +69,7 @@ export default function FaqSection({
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <span className="py-1.5 px-5 bg-indigo-100 dark:bg-indigo-900 rounded-full text-xs font-semibold text-indigo-600 dark:text-indigo-300 inline-block mb-4 transition-all duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-800 shadow-sm">
-              FAQ
-            </span>
+            <TitleTopBadge title="FAQ" />
             <h2 className="text-pretty text-4xl font-bold lg:text-6xl mb-4">
               {faqSectionContent.title}
             </h2>
