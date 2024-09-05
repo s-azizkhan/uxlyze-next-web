@@ -12,8 +12,8 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: `${APP_NAME} | Extend your hospitality with ${APP_NAME}`,
-  description: `Extend your hospitality with ${APP_NAME}`,
+  title: `${APP_NAME} | Bridging the gap between Design and Reality`,
+  description: `Bridging the gap between Design and Reality`,
 };
 
 export default function RootLayout({
