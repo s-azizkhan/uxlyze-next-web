@@ -25,7 +25,7 @@ import TitleTopBadge from "../shared/title-top-badge";
 const pricingSectionContent = {
   title: "Elevate Your Design Process with",
   titleHighlight: "AI-Powered UX Analysis",
-  description: `Choose the perfect plan to revolutionize your UI/UX workflow. Start your 14-day free trial of ${APP_NAME} today - no credit card required.`,
+  description: `Choose the perfect plan to revolutionize your UI/UX workflow. Start your 7-day free trial of ${APP_NAME} today - no credit card required.`,
   plans: [
     {
       name: "Starter",
@@ -63,7 +63,7 @@ const pricingSectionContent = {
     },
   ],
   footer:
-    "All plans include a 14-day free trial. Upgrade, downgrade, or cancel anytime.",
+    "All plans include a 7-day free trial. Upgrade, downgrade, or cancel anytime.",
 };
 
 const PricingSection = () => {
@@ -98,7 +98,7 @@ const PricingSection = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
-        className="py-24"
+        className="py-20"
       >
         <div className="container mx-auto px-4">
           <motion.div

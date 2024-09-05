@@ -122,28 +122,52 @@ const Feature = ({
   return (
     <Link href={href || "#"}>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
+        whileHover={{
+          scale: 1.05,
+          rotate: [0, 1, -1, 0],
+          transition: { duration: 0.3 },
+        }}
         className={cn(
-          "flex flex-col p-6 rounded-xl bg-white dark:bg-neutral-800 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer",
-          "transform hover:-translate-y-2"
+          "flex flex-col p-6 rounded-xl bg-white/10 dark:bg-neutral-800/10 backdrop-blur-lg shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer",
+          "transform hover:-translate-y-2 hover:bg-white/20 dark:hover:bg-neutral-800/20 border border-black/15 dark:border-white/15"
         )}
       >
-        <div className="mb-4 text-primary dark:text-primary-light transition-colors duration-300 group-hover:text-secondary">
+        <motion.div
+          className="mb-4 text-primary dark:text-primary-light transition-colors duration-300 group-hover:text-secondary"
+          whileHover={{ rotate: 360, scale: 1.2 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        >
           {icon}
-        </div>
-        <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+        </motion.div>
+        <motion.h3
+          className="text-xl font-bold mb-2 text-black dark:text-white group-hover:text-primary transition-colors duration-300"
+          whileHover={{ scale: 1.05 }}
+        >
           {title}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors duration-300">
+        </motion.h3>
+        <motion.p
+          className="text-sm text-gray-800 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           {description}
-        </p>
-        {/* TODO: Add this back in */}
-        <div className="mt-4 flex items-center text-primary dark:text-primary-light text-opacity-80 group-hover:text-opacity-100 transition-colors duration-300 hidden">
-          <span className="text-sm font-semibold">Learn more</span>
-          <IconRocket className="w-4 h-4 ml-2 animate-pulse" />
-        </div>
+        </motion.p>
+        <motion.div
+          className="mt-4 flex items-center text-primary dark:text-primary-light text-opacity-80 group-hover:text-opacity-100 transition-colors duration-300"
+          whileHover={{ x: 5 }}
+        >
+          <span className="text-sm font-semibold">Explore</span>
+          <motion.div
+            animate={{ x: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <IconRocket className="w-4 h-4 ml-2" />
+          </motion.div>
+        </motion.div>
       </motion.div>
     </Link>
   );
@@ -168,10 +192,10 @@ export default function FeatureSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center mb-16"
+            className="text-center mb-3"
           >
             <TitleTopBadge title={featureSectionContent.heading.badge} />
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-2">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={
@@ -198,7 +222,7 @@ export default function FeatureSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              className="text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
               {featureSectionContent.description}
             </motion.p>
