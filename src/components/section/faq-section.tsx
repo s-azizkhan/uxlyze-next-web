@@ -60,7 +60,7 @@ export default function FaqSection({
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
-        className="py-24"
+        className="py-20"
       >
         <div className="container mx-auto px-4">
           <motion.div
