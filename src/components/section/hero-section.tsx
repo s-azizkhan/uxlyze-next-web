@@ -126,15 +126,15 @@ export default function HeroSection() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="z-10 mb-8 flex items-center justify-center"
           >
-            <Link href={heroSectionContent.linkUrl} className="inline-flex">
+            <Link
+              href={heroSectionContent.linkUrl}
+              className="inline-flex mb-6"
+            >
               <span className="relative inline-block overflow-hidden rounded-full p-[1px]">
-                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#a9a9a9_0%,#0c0c0c_50%,#a9a9a9_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#171717_0%,#737373_50%,#171717_100%)]"></span>
-                <div className="inline-flex h-full w-full cursor-pointer justify-center rounded-full bg-white px-3 py-1 text-xs font-medium leading-5 text-slate-600 backdrop-blur-xl dark:bg-black dark:text-slate-200 text-">
+                <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E535AB_0%,#3245FF_50%,#E535AB_100%)]"></span>
+                <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black/80 px-4 py-2 text-sm font-medium text-white backdrop-blur-3xl">
                   {heroSectionContent.linkText}
-                  <span className="inline-flex items-center pl-2 text-black dark:text-white">
-                    {heroSectionContent.linkCta}{" "}
-                    <ArrowRight02Icon className="size-4 ml-2" />
-                  </span>
+                  <ArrowRight02Icon className="ml-2 h-4 w-4" />
                 </div>
               </span>
             </Link>
