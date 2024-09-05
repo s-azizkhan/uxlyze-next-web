@@ -20,7 +20,7 @@ const heroSectionContent = {
   linkCta: "Try Now",
   title: "Elevate Your Design Process",
   subtitle: `with ${APP_NAME} AI`,
-  description: `${APP_NAME} is an innovative platform that revolutionizes UI/UX evaluation. Automatically compare Figma designs to live websites, get instant insights, and streamline your design workflow with our easy-to-use tools and AI-powered analysis.`,
+  description: `Effortlessly compare Figma designs to live sites. Get instant insights, automate audits, and streamline your workflow with AI-powered analysis.`,
   buttonText: "See How It Works",
   rating: 4.8,
   testimonial: "from 500+ satisfied designers & developers",
