@@ -112,21 +112,23 @@ export default function HeroSection() {
         )}
       </motion.div>
 
-      <motion.div
-        initial={{ x: 50, opacity: 0 }}
-        animate={{ x: 0, opacity: 0.7 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className="absolute right-0 bottom-0 lg:hidden"
-      >
-        <Image
-          src={heroSectionContent.rightImage}
-          alt="Web developer coding"
-          className="w-32 h-auto opacity-70 dark:hidden"
-          loading="lazy"
-          width={1000}
-          height={1000}
-        />
-      </motion.div>
+      {heroSectionContent.rightImage && (
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 0.7 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="absolute right-0 bottom-0 lg:hidden"
+        >
+          <Image
+            src={heroSectionContent.rightImage}
+            alt="Web developer coding"
+            className="w-32 h-auto opacity-70 dark:hidden"
+            loading="lazy"
+            width={1000}
+            height={1000}
+          />
+        </motion.div>
+      )}
       <section className="pb-14 lg:py-24" id="hero-section">
         <div className="container text-center px-4 sm:px-6 lg:px-8">
           <motion.div
