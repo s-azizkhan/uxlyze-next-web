@@ -10,6 +10,9 @@ import {
   IconEaseInOut,
   IconDeviceAnalytics,
   IconRocket,
+  IconBulb,
+  IconZoomCheck,
+  IconBuildingBridge,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "../shared/max-width-wrapper";
@@ -19,72 +22,41 @@ import Link from "next/link";
 import React, { useRef } from "react";
 import TitleTopBadge from "../shared/title-top-badge";
 
+const featureContent = [
+  {
+    icon: <IconBuildingBridge className="w-8 h-8 text-blue-500" />,
+    title: "Bridge Design & Reality",
+    description:
+      "Seamlessly compare Figma designs with live websites for pixel-perfect implementation.",
+  },
+  {
+    icon: <IconRocket className="w-8 h-8 text-red-500" />,
+    title: "Streamline Workflow",
+    description:
+      "Automate UI/UX tests and audits to accelerate your development process.",
+  },
+  {
+    icon: <IconBulb className="w-8 h-8 text-yellow-500" />,
+    title: "AI-Powered Insights",
+    description:
+      "Get instant, actionable insights to improve your designs and user experience.",
+  },
+  {
+    icon: <IconZoomCheck className="w-8 h-8 text-green-500" />,
+    title: "Effortless Comparison",
+    description:
+      "Easily spot discrepancies between designs and live sites with visual diff tools.",
+  },
+];
 const featureSectionContent = {
-  features: [
-    {
-      title: "AI-Powered Insights",
-      description:
-        "Harness cutting-edge AI to instantly analyze UI/UX elements and generate actionable insights.",
-      href: "/features/ai-analysis",
-      icon: <IconRobot className="w-8 h-8 text-blue-500" />,
-    },
-    {
-      title: "Seamless Figma Sync",
-      description:
-        "Effortlessly compare Figma designs with live websites for pixel-perfect implementation.",
-      href: "/features/figma-integration",
-      icon: <IconBrandFigma className="w-8 h-8 text-purple-500" />,
-    },
-    {
-      title: "Real-time Visual Diff",
-      description:
-        "See design discrepancies in real-time for lightning-fast iterations and improvements.",
-      href: "/features/real-time-comparison",
-      icon: <IconEye className="w-8 h-8 text-green-500" />,
-    },
-    {
-      title: "Tailored Reports",
-      description:
-        "Generate custom reports focused on the metrics that matter most to your project's success.",
-      href: "/features/customizable-reports",
-      icon: <IconAdjustmentsBolt className="w-8 h-8 text-yellow-500" />,
-    },
-    {
-      title: "Frictionless Integration",
-      description:
-        "Integrate seamlessly into your workflow with our intuitive API and robust documentation.",
-      href: "/features/easy-integration",
-      icon: <IconPuzzle className="w-8 h-8 text-red-500" />,
-    },
-    {
-      title: "Adaptive AI Learning",
-      description:
-        "Our AI evolves with your design patterns, delivering increasingly precise feedback over time.",
-      href: "/features/adaptive-analysis",
-      icon: <IconBrain className="w-8 h-8 text-indigo-500" />,
-    },
-    {
-      title: "Accessibility Guardian",
-      description:
-        "Ensure inclusive design with automated WCAG compliance checks and recommendations.",
-      href: "/features/accessibility-checker",
-      icon: <IconEaseInOut className="w-8 h-8 text-teal-500" />,
-    },
-    {
-      title: "Trend Forecasting",
-      description:
-        "Stay ahead with AI-driven insights into emerging UI/UX trends and industry best practices.",
-      href: "/features/trend-analysis",
-      icon: <IconDeviceAnalytics className="w-8 h-8 text-pink-500" />,
-    },
-  ],
+  features: featureContent,
   heading: {
-    badge: "Next-Gen UX Analysis",
-    title: "Supercharge Your Design Workflow",
-    subtitle: "with AI-Powered Precision",
+    badge: "Next-Gen Features",
+    title: "AI-Powered Design Tools",
+    subtitle: "Enhance Your Workflow",
   },
   description:
-    "Experience the future of UI/UX evaluation. Our AI-driven platform automates design comparisons, delivers instant insights, and streamlines your entire workflow. Elevate your design process and consistently deliver exceptional user experiences.",
+    "Our AI-powered platform simplifies UI/UX evaluation. Compare designs, get instant insights, and streamline your workflow to deliver better user experiences.",
 };
 
 const Features = () => {
@@ -97,7 +69,7 @@ const Features = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, staggerChildren: 0.1 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 py-16"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 relative z-10 py-16"
     >
       {featureSectionContent.features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
@@ -143,13 +115,13 @@ const Feature = ({
           {icon}
         </motion.div>
         <motion.h3
-          className="text-xl font-bold mb-2 text-black dark:text-white group-hover:text-primary transition-colors duration-300"
+          className="text-2xl font-bold mb-2 text-black dark:text-white group-hover:text-primary transition-colors duration-300"
           whileHover={{ scale: 1.05 }}
         >
           {title}
         </motion.h3>
         <motion.p
-          className="text-sm text-gray-800 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300"
+          className="text-lg text-gray-900 dark:text-gray-50 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -222,7 +194,7 @@ export default function FeatureSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
               {featureSectionContent.description}
             </motion.p>
