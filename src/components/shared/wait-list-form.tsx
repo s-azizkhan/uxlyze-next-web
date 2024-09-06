@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight01Icon, Mail01Icon } from "hugeicons-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -77,7 +79,7 @@ export default function WaitListForm() {
             </Button>
           </div>
 
-          <p className="text-xs mt-1 text-gray-500 dark:text-gray-300">
+          <p className="text-xs mt-1 text-gray-500 dark:text-gray-300 text-center">
             Join the waitlist to get access to the AI menu and more features{" "}
             <span className="font-bold">
               without any cost for the first 100 users.

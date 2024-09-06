@@ -8,19 +8,20 @@ import {
 } from "hugeicons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { APP_NAME } from "@/config/app.config";
 import Image from "next/image";
 import WaitListForm from "../shared/wait-list-form";
 
 const heroSectionContent = {
-  leftImage: "https://illustrations.popsy.co/violet/graphic-design.svg",
-  rightImage: "https://illustrations.popsy.co/violet/web-design.svg",
+  // leftImage: "https://illustrations.popsy.co/violet/graphic-design.svg",
+  // rightImage: "https://illustrations.popsy.co/violet/web-design.svg",
+  leftImage: "",
+  rightImage: "",
   linkUrl: "/register",
   linkText: "New: AI-Powered UX Analysis ✨",
   linkCta: "Try Now",
-  title: "Elevate Your Design Process",
-  subtitle: `with ${APP_NAME} AI`,
-  description: `Effortlessly compare Figma designs to live sites. Get instant insights, automate audits, and streamline your workflow with AI-powered analysis.`,
+  title: "Bridging the Gap Between",
+  subtitle: `Design & Reality`,
+  description: `Effortlessly compare Figma designs or run standard UI/UX tests to live sites. Get instant insights, automate audits, and streamline your workflow with AI-powered analysis.`,
   buttonText: "See How It Works",
   rating: 4.8,
   testimonial: "from 500+ satisfied designers & developers",
@@ -61,46 +62,54 @@ export default function HeroSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
       >
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
-          <Image
-            src={heroSectionContent.leftImage}
-            alt="UX designer working"
-            className="w-96 h-auto dark:hidden"
-            loading="lazy"
-            width={1000}
-            height={1000}
-          />
-        </div>
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
-          <Image
-            src={heroSectionContent.rightImage}
-            alt="Web developer coding"
-            className="w-96 h-auto dark:hidden"
-            loading="lazy"
-            width={1000}
-            height={1000}
-          />
-        </div>
-        <div className="absolute left-0 top-0 lg:hidden">
-          <Image
-            src={heroSectionContent.leftImage}
-            alt="UX designer working"
-            className="w-32 h-auto opacity-70 dark:hidden"
-            loading="lazy"
-            width={1000}
-            height={1000}
-          />
-        </div>
-        <div className="absolute right-0 bottom-0 lg:hidden">
-          <Image
-            src={heroSectionContent.rightImage}
-            alt="Web developer coding"
-            className="w-32 h-auto opacity-70 dark:hidden"
-            loading="lazy"
-            width={1000}
-            height={1000}
-          />
-        </div>
+        {heroSectionContent.leftImage && (
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
+            <Image
+              src={heroSectionContent.leftImage}
+              alt="UX designer working"
+              className="w-96 h-auto dark:hidden"
+              loading="lazy"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        )}
+        {heroSectionContent.rightImage && (
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block">
+            <Image
+              src={heroSectionContent.rightImage}
+              alt="Web developer coding"
+              className="w-96 h-auto dark:hidden"
+              loading="lazy"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        )}
+        {heroSectionContent.leftImage && (
+          <div className="absolute left-0 top-0 lg:hidden">
+            <Image
+              src={heroSectionContent.leftImage}
+              alt="UX designer working"
+              className="w-32 h-auto opacity-70 dark:hidden"
+              loading="lazy"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        )}
+        {heroSectionContent.rightImage && (
+          <div className="absolute right-0 bottom-0 lg:hidden">
+            <Image
+              src={heroSectionContent.rightImage}
+              alt="Web developer coding"
+              className="w-32 h-auto opacity-70 dark:hidden"
+              loading="lazy"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        )}
       </motion.div>
 
       <motion.div
@@ -144,16 +153,16 @@ export default function HeroSection() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="mx-auto flex max-w-screen-lg flex-col gap-8"
+            className="mx-auto flex max-w-screen-lg flex-col gap-4"
           >
-            <h1 className="flex flex-col justify-center items-center text-center text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-gray-50">
+            <h1 className="flex flex-col justify-center items-center text-center text-4xl sm:text-7xl font-extrabold tracking-tighter text-gray-900 dark:text-gray-50">
               {heroSectionContent.title}
-              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent inline-flex items-center text-3xl sm:text-4xl lg:text-6xl mt-2">
+              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent inline-flex items-center text-3xl sm:text-4xl lg:text-6xl mt-1 lg:mt-3 tracking-wide">
                 {heroSectionContent.subtitle}
                 <SparklesIcon className="size-5 sm:size-7 ml-1 text-purple-600" />
               </span>
             </h1>
-            <p className="mx-auto max-w-2xl text-sm sm:text-base lg:text-xl leading-relaxed text-muted-foreground">
+            <p className="mx-auto max-w-2xl text-sm sm:text-base lg:text-xl leading-relaxed text-gray-900 dark:text-gray-50">
               {heroSectionContent.description}
             </p>
           </motion.div>

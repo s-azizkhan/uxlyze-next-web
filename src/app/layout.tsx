@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "../../components/Providers";
 import { APP_NAME } from "@/config/app.config";
 import Script from "next/script";
+import SubmitFeedback from "@/components/shared/SubmitFeedback";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext", "vietnamese"],
@@ -35,7 +36,10 @@ export default function RootLayout({
         </Script>
       )}
       <Providers>
-        <body className={`${bricolage.className}`}>{children}</body>
+        <body className={`${bricolage.className}`}>
+          {children}
+          <SubmitFeedback />
+        </body>
       </Providers>
     </html>
   );
