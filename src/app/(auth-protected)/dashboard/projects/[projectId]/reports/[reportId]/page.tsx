@@ -73,7 +73,7 @@ export default function ViewSingleReportPage({
               Back to Reports
             </Button>
           </Link>
-          <Button>
+          <Button className="hidden">
             <Edit02Icon className="h-5 w-5 mr-2" />
             Edit Report
           </Button>
