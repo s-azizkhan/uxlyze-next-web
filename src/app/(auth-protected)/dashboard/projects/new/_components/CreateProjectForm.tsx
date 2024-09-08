@@ -17,12 +17,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import {
@@ -32,6 +26,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import Image from "next/image";
 
 const formSchema = z.object({
   name: z.string().min(1, "Project name is required"),
@@ -62,12 +57,14 @@ export default function CreateProjectForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-
     try {
-      // TODO: Implement API call to create project
-      console.log(values);
+      const response = await fetch("/api/projects", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+      console.log(response);
       toast.success("Project created successfully!");
-      router.push("/dashboard");
+      // router.push("/dashboard");
     } catch (error) {
       toast.error("Failed to create project. Please try again.");
     } finally {
@@ -76,60 +73,50 @@ export default function CreateProjectForm() {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Create New Project</h2>
-          <Link
-            href="/dashboard"
-            className="text-sm text-muted-foreground hover:text-primary"
-          >
-            <ArrowLeftIcon className="w-4 h-4 mr-1 inline" />
-            Back to Dashboard
-          </Link>
-        </div>
-      </CardHeader>
-      <CardContent>
+    <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
+      <div className="w-full md:w-1/2 order-1">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter project name" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Type</FormLabel>
-                  <FormControl>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter project name" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Type</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a project type" />
-                      </SelectTrigger>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a project type" />
+                        </SelectTrigger>
+                      </FormControl>
                       <SelectContent>
                         <SelectItem value="website">Website</SelectItem>
-                        <SelectItem value="mobile-app">Mobile App</SelectItem>
+                        {/* <SelectItem value="mobile-app">Mobile App</SelectItem> */}
                         <SelectItem value="web-app">Web App</SelectItem>
                       </SelectContent>
                     </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="description"
@@ -147,45 +134,60 @@ export default function CreateProjectForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="figmaUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Figma URL (optional)</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter Figma URL" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="websiteUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Website URL (optional)</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter website URL" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="figmaUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Figma URL (optional)</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter Figma URL" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="websiteUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Website URL (optional)</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter website URL" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex justify-between pt-6">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push("/dashboard")}
+                className="w-[48%]"
+              >
+                <ArrowLeftIcon className="w-4 h-4 mr-2" />
+                Cancel
+              </Button>
+              <Button type="submit" disabled={isLoading} className="w-[48%]">
+                {isLoading ? "Creating..." : "Create Project"}
+              </Button>
+            </div>
           </form>
         </Form>
-      </CardContent>
-      <CardFooter>
-        <Button
-          type="submit"
-          disabled={isLoading}
-          onClick={form.handleSubmit(onSubmit)}
-          className="w-full"
-        >
-          {isLoading ? "Creating..." : "Create Project"}
-        </Button>
-      </CardFooter>
-    </Card>
+      </div>
+      <div className="w-full md:w-1/2 order-2 hidden md:block">
+        <Image
+          src="https://illustrations.popsy.co/violet/paper-documents.svg"
+          alt="Create Project"
+          width={500}
+          height={500}
+          className="w-full h-auto transform scale-x-[-1]"
+        />
+      </div>
+    </div>
   );
 }
