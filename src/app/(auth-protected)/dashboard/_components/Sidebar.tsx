@@ -69,9 +69,9 @@ export default function DashboardSidebar() {
 
   return (
     <>
-      <div className="hidden md:flex flex-col border-r bg-muted/40 transition-all ease-in-out duration-300">
+      <div className="hidden md:flex flex-col border-r bg-muted/40 transition-all ease-in-out duration-300 sticky top-0 h-screen">
         {/* Top Section */}
-        <div className="flex h-16 items-center justify-between border-b px-6 lg:h-[70px] lg:px-8 shadow-sm">
+        <div className="flex h-16 items-center justify-between border-b px-6 lg:h-[60px] lg:px-8 shadow-sm">
           <Link href="/" className="flex items-center gap-2">
             <IconAnalyze className="h-8 w-8 text-primary animate-bounce-slow text-violet-500" />
             <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-violet-500 text-transparent bg-clip-text">

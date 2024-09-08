@@ -49,18 +49,21 @@ const projects = [
 const recentReports = [
   {
     id: 1,
+    projectId: 1,
     title: "E-commerce Redesign Analysis",
     projectName: "E-commerce Redesign",
     createdAt: "2023-04-20",
   },
   {
     id: 2,
+    projectId: 2,
     title: "Mobile App UI Usability Test",
     projectName: "Mobile App UI",
     createdAt: "2023-04-18",
   },
   {
     id: 3,
+    projectId: 3,
     title: "Dashboard Layout Evaluation",
     projectName: "Dashboard Layout",
     createdAt: "2023-04-16",
@@ -122,7 +125,7 @@ export default function DashboardPage() {
                     variant="default"
                     className="w-full transition-colors duration-300"
                   >
-                    View Project
+                    View Reports
                     <EyeIcon className="size-5 ml-2" />
                   </Button>
                 </Link>
@@ -177,7 +180,7 @@ export default function DashboardPage() {
               </CardContent>
               <CardFooter>
                 <Link
-                  href={`/dashboard/reports/${report.id}`}
+                  href={`/dashboard/projects/${report.projectId}/reports/${report.id}`}
                   className="w-full"
                 >
                   <Button variant="outline" className="w-full">

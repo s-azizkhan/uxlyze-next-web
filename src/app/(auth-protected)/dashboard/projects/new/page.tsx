@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { APP_NAME } from "@/config/app.config";
 import CreateProjectForm from "./_components/CreateProjectForm";
+import PageHeading from "@/components/dashboard/PageHeading";
 
 export const metadata: Metadata = {
   title: `Create Project | ${APP_NAME}`,
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 
 export default function CreateProjectPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-semibold md:text-3xl">Create Project</h1>
-      </div>
+    <div className="container mx-auto px-2 lg:px-4 py-8">
+      <PageHeading
+        title="Create Project"
+        description="Create a new project for UI & UX analysis"
+        backText="Back"
+      />
       <CreateProjectForm />
     </div>
   );

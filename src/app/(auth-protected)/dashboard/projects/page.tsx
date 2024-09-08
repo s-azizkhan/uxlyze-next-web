@@ -100,7 +100,7 @@ export default function DashboardPage() {
                     variant="default"
                     className="w-full transition-colors duration-300"
                   >
-                    View Project
+                    View Reports
                     <EyeIcon className="size-5 ml-2" />
                   </Button>
                 </Link>
