@@ -60,14 +60,14 @@ const report = {
 export default function ViewSingleReportPage({
   params,
 }: {
-  params: { id: string; reportId: string };
+  params: { projectId: string; reportId: string };
 }) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold md:text-3xl">{report.title}</h1>
         <div className="flex space-x-4">
-          <Link href={`/dashboard/projects/${params.id}/reports`}>
+          <Link href={`/dashboard/projects/${params.projectId}/reports`}>
             <Button variant="outline">
               <ArrowLeftIcon className="h-5 w-5 mr-2" />
               Back to Reports

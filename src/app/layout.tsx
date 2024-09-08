@@ -11,9 +11,10 @@ const bricolage = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext", "vietnamese"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
+export const metaTitlePostFix = `${APP_NAME} | Bridging the gap between Design and Reality`;
 
 export const metadata: Metadata = {
-  title: `${APP_NAME} | Bridging the gap between Design and Reality`,
+  title: metaTitlePostFix,
   description: `Bridging the gap between Design and Reality`,
 };
 

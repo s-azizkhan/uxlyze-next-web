@@ -54,14 +54,14 @@ export const sidebarItems = [
     href: "/dashboard",
   },
   {
-    name: "Reports",
+    name: "Projects",
     icon: Package,
-    href: "/dashboard/venues",
+    href: "/dashboard/projects",
   },
   {
-    name: "Analytics",
+    name: "reports",
     icon: LineChart,
-    href: "/dashboard/analytics",
+    href: "/dashboard/reports",
   },
 ];
 export default function DashboardSidebar() {

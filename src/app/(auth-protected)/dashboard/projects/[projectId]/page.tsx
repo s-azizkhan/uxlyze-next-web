@@ -1,7 +1,14 @@
+import { metaTitlePostFix } from "@/app/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EyeIcon, PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
+
+// metadata
+export const metadata = {
+  title: "Projects | " + metaTitlePostFix,
+  description: "View your projects",
+};
 
 // Mock data (replace with actual data fetching logic)
 const project = {
@@ -22,13 +29,13 @@ const project = {
 export default function ViewProjectPage({
   params,
 }: {
-  params: { id: string };
+  params: { projectId: string };
 }) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold md:text-3xl">{project.name}</h1>
-        <Link href={`/dashboard/projects/${params.id}/reports/new`}>
+        <Link href={`/dashboard/projects/${params.projectId}/reports/new`}>
           <Button>
             <PlusSignIcon className="h-5 w-5 mr-2" />
             New Report
@@ -94,7 +101,7 @@ export default function ViewProjectPage({
                 Created on: {report.createdAt}
               </p>
               <Link
-                href={`/dashboard/projects/${params.id}/reports/${report.id}`}
+                href={`/dashboard/projects/${params.projectId}/reports/${report.id}`}
               >
                 <Button variant="outline" className="w-full">
                   <EyeIcon className="mr-2 h-4 w-4" />

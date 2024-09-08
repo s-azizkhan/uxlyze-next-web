@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight01Icon, EyeIcon, PlusSignIcon } from "hugeicons-react";
+import { EyeIcon, PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,7 +13,7 @@ import { metaTitlePostFix } from "@/app/layout";
 
 // metadata
 export const metadata = {
-  title: "Dashboard | " + metaTitlePostFix,
+  title: "My Projects | " + metaTitlePostFix,
   description: "View your projects and reports",
 };
 
@@ -42,28 +42,6 @@ const projects = [
     image: "/images/placeholder.svg",
     reportsCount: 1,
     lastUpdated: "2023-04-05",
-  },
-];
-
-// Add this after the existing projects array
-const recentReports = [
-  {
-    id: 1,
-    title: "E-commerce Redesign Analysis",
-    projectName: "E-commerce Redesign",
-    createdAt: "2023-04-20",
-  },
-  {
-    id: 2,
-    title: "Mobile App UI Usability Test",
-    projectName: "Mobile App UI",
-    createdAt: "2023-04-18",
-  },
-  {
-    id: 3,
-    title: "Dashboard Layout Evaluation",
-    projectName: "Dashboard Layout",
-    createdAt: "2023-04-16",
   },
 ];
 
@@ -148,48 +126,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       )}
-
-      {/* New reports section */}
-      <div className="mt-12">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold md:text-3xl">Recent Reports</h2>
-          <Link href="/dashboard/reports">
-            <Button variant="outline">
-              View All Reports
-              <ArrowRight01Icon className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recentReports.map((report) => (
-            <Card key={report.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-xl">{report.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-2">
-                  Project: {report.projectName}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Created on: {report.createdAt}
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Link
-                  href={`/dashboard/reports/${report.id}`}
-                  className="w-full"
-                >
-                  <Button variant="outline" className="w-full">
-                    View Report
-                    <EyeIcon className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
