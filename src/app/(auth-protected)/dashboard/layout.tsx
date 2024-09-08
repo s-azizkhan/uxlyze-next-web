@@ -3,6 +3,7 @@
 import DashboardSidebar from "./_components/Sidebar";
 import DashboardNavbar from "./_components/Navbar";
 import { signIn, useSession } from "next-auth/react";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function DashboardLayout({
   children,
@@ -27,6 +28,7 @@ export default function DashboardLayout({
           </main>
         </div>
       </div>
+      <Toaster />
     </>
   );
 }
