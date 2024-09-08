@@ -62,4 +62,7 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
   },
+  pages: {
+    signIn: "/register", // TODO: Change to login
+  },
 };
