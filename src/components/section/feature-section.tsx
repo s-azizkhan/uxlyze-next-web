@@ -61,7 +61,7 @@ const featureSectionContent = {
 
 const Features = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <motion.div
@@ -147,7 +147,7 @@ const Feature = ({
 
 export default function FeatureSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>

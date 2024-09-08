@@ -69,7 +69,7 @@ const pricingSectionContent = {
 const PricingSection = () => {
   const [isYearly, setIsYearly] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   const getPricing = (planIndex: number) => {
     const prices = [

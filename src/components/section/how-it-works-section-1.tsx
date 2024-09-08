@@ -65,7 +65,7 @@ const howItWorksContent = [
 
 const Steps = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -174,7 +174,7 @@ const Step = ({
 
 export default function HowItWorksSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>
