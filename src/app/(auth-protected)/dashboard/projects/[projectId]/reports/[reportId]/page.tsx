@@ -1,10 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Edit02Icon } from "hugeicons-react";
-import { ArrowLeftIcon, MessageSquare } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { MessageSquare, Download, Edit2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 
 // Mock data (replace with actual data fetching logic)
@@ -62,157 +63,156 @@ export default function ViewSingleReportPage({
 }: {
   params: { projectId: string; reportId: string };
 }) {
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  const toggleSection = (section: string) => {
+    setExpandedSection((prev) => (prev === section ? null : section));
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-semibold md:text-3xl">{report.title}</h1>
-        <div className="flex space-x-4">
-          <Link href={`/dashboard/projects/${params.projectId}/reports`}>
-            <Button variant="outline">
-              <ArrowLeftIcon className="h-5 w-5 mr-2" />
-              Back to Reports
-            </Button>
-          </Link>
-          <Button className="hidden">
-            <Edit02Icon className="h-5 w-5 mr-2" />
-            Edit Report
-          </Button>
-        </div>
-      </div>
-
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Report Details</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground mb-4">
-            Created on: {report.createdAt}
-          </p>
-          <p className="mb-4">{report.description}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h3 className="font-semibold mb-2">Figma URL</h3>
-              <a
-                href={report.figmaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                {report.figmaUrl}
-              </a>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Website URL</h3>
-              <a
-                href={report.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                {report.websiteUrl}
-              </a>
-            </div>
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <header className="mb-12 bg-gradient-to-r from-violet-600 to-indigo-600 p-6 rounded-xl shadow-lg text-white">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">{report.title}</h1>
+            <p className="text-violet-100">Generated on {report.createdAt}</p>
           </div>
-        </CardContent>
-      </Card>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0">
+            <Button
+              variant="outline"
+              className="border-white  hover:text-violet-800 text-violet-600"
+            >
+              <Download className="mr-2 h-4 w-4" /> Save as PDF
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white hover:text-violet-800 text-violet-600"
+            >
+              <Edit2 className="mr-2 h-4 w-4" /> Edit Report
+            </Button>
+          </div>
+        </div>
+      </header>
 
-      <Tabs defaultValue="findings" className="mb-8">
-        <TabsList>
-          <TabsTrigger value="findings">Key Findings</TabsTrigger>
-          <TabsTrigger value="ai-insights">AI Insights</TabsTrigger>
-          <TabsTrigger value="comparison">Design Comparison</TabsTrigger>
-        </TabsList>
-        <TabsContent value="findings">
-          <Card>
-            <CardHeader>
-              <CardTitle>Key Findings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc pl-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <Card className="mb-8">
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-semibold text-violet-600 mb-4">
+                Executive Summary
+              </h2>
+              <p className="text-lg text-gray-700">{report.description}</p>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-8">
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-semibold text-violet-600 mb-4">
+                Key Findings
+              </h2>
+              <ul className="space-y-2">
                 {report.findings.map((finding, index) => (
-                  <li key={index} className="mb-2">
-                    {finding}
+                  <li key={index} className="flex items-start">
+                    <span className="text-violet-500 mr-2">•</span>
+                    <span className="text-gray-700">{finding}</span>
                   </li>
                 ))}
               </ul>
             </CardContent>
           </Card>
-        </TabsContent>
-        <TabsContent value="ai-insights">
-          <Card>
-            <CardHeader>
-              <CardTitle>AI-Generated Insights</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {report.aiInsights.map((insight, index) => (
-                <div key={index} className="mb-4">
-                  <h3 className="font-semibold mb-2">{insight.title}</h3>
-                  <Progress value={insight.score} className="mb-2" />
-                  <p className="text-sm text-muted-foreground">
-                    {insight.description}
-                  </p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="comparison">
-          <Card>
-            <CardHeader>
-              <CardTitle>Design Comparison</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <Card className="mb-8">
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-semibold text-violet-600 mb-4">
+                Design Comparison
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <h3 className="font-semibold mb-2">Figma Design</h3>
                   <Image
-                    src="/images/figma-design-placeholder.jpg"
+                    src="/images/placeholder.svg"
                     alt="Figma Design"
                     width={500}
                     height={300}
-                    className="rounded-lg"
+                    className="rounded-lg shadow-md"
                   />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2">Live Website</h3>
                   <Image
-                    src="/images/live-website-placeholder.jpg"
+                    src="/images/placeholder.svg"
                     alt="Live Website"
                     width={500}
                     height={300}
-                    className="rounded-lg"
+                    className="rounded-lg shadow-md"
                   />
                 </div>
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
-      </Tabs>
+        </div>
+
+        <div>
+          <Card className="mb-8 sticky top-4">
+            <CardContent className="pt-6">
+              <h2 className="text-2xl font-semibold text-violet-600 mb-4">
+                AI-Generated Insights
+              </h2>
+              {report.aiInsights.map((insight, index) => (
+                <div key={index} className="mb-6">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-semibold text-lg">{insight.title}</h3>
+                    <span className="text-sm font-medium bg-violet-100 text-violet-800 px-2 py-1 rounded">
+                      {insight.score}%
+                    </span>
+                  </div>
+                  <Progress value={insight.score} className="mb-2" />
+                  <p className="text-sm text-gray-600">{insight.description}</p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Comments and Feedback</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
+          <h2 className="text-2xl font-semibold text-violet-600 mb-4">
+            Comments and Feedback
+          </h2>
           {report.comments.map((comment) => (
-            <div key={comment.id} className="mb-4 p-4 bg-gray-100 rounded-lg">
+            <div key={comment.id} className="mb-4 p-4 bg-gray-50 rounded-lg">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-semibold">{comment.user}</span>
-                <span className="text-sm text-muted-foreground">
+                <span className="font-semibold text-violet-600">
+                  {comment.user}
+                </span>
+                <span className="text-sm text-gray-500">
                   {comment.createdAt}
                 </span>
               </div>
-              <p>{comment.content}</p>
+              <p className="text-gray-700">{comment.content}</p>
             </div>
           ))}
-          <div className="mt-4">
-            <Button>
-              <MessageSquare className="h-5 w-5 mr-2" />
-              Add Comment
-            </Button>
-          </div>
+          <Button className="mt-4">
+            <MessageSquare className="h-5 w-5 mr-2" />
+            Add Comment
+          </Button>
         </CardContent>
       </Card>
+
+      <footer className="mt-12 text-center text-sm text-gray-600">
+        <p>
+          Report generated by{" "}
+          <Link
+            href="https://uxlyze.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-violet-600 hover:text-violet-800"
+          >
+            Uxlyze
+          </Link>
+        </p>
+      </footer>
     </div>
   );
 }
