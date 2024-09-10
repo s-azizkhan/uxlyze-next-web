@@ -30,6 +30,7 @@
     "framer-motion": "^11.3.31",
     "heroicons": "^2.1.5",
     "hugeicons-react": "^0.3.0",
+    "loops": "^3.3.0",
     "lucide-react": "^0.436.0",
     "next": "^14.2.7",
     "next-auth": "^4.24.7",
