@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { waitlistTable } from "@/db/schema/waitlist.schema";
 import { eq } from "drizzle-orm";
+import { LoopsClient } from "loops";
+
+const loops = new LoopsClient(process.env.LOOPS_API_KEY as string);
 
 export async function POST(request: Request) {
   try {
@@ -26,6 +29,9 @@ export async function POST(request: Request) {
 
     // Insert email into the waitlist table
     await db.insert(waitlistTable).values({ email });
+
+    // Create a contact in Loops to send email
+    await loops.createContact(email as string);
 
     return NextResponse.json(
       {
