@@ -2,9 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { waitlistTable } from "@/db/schema/waitlist.schema";
 import { eq } from "drizzle-orm";
-import { LoopsClient } from "loops";
-
-const loops = new LoopsClient(process.env.LOOPS_API_KEY as string);
+import { loops } from "@/lib/loops";
 
 export async function POST(request: Request) {
   try {

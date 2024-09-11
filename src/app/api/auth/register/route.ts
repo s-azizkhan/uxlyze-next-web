@@ -1,5 +1,6 @@
 import { db } from "@/db";
-import { usersTable } from "@/db/schema/user.schema";
+import { InsertUser, usersTable } from "@/db/schema/user.schema";
+import { loops } from "@/lib/loops";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -27,14 +28,34 @@ export async function POST(request: Request) {
     const bcrypt = require("bcrypt");
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.insert(usersTable).values({
+    const newUserData: InsertUser = {
       name: name,
       email: email,
       password: hashedPassword,
-    });
+    };
+
+    // Create a contact in Loops to send email
+    const loopsUser = await loops.findContact({ email });
+    if (loopsUser.length === 0) {
+      const newLoopsUser = await loops.createContact(email, {
+        name: name,
+      });
+      if (newLoopsUser.success) {
+        newUserData.mailingUid = newLoopsUser.id;
+        newUserData.mailingProvider = "LOOPS";
+      } else {
+        console.log("Error creating contact in Loops ", { newLoopsUser });
+      }
+    } else {
+      newUserData.mailingUid = loopsUser[0].id;
+      newUserData.mailingProvider = "LOOPS";
+    }
+
+    await db.insert(usersTable).values(newUserData);
+
     return NextResponse.json(
-      { success: "Account created successfully" },
-      { status: 200 }
+      { success: "Joined the revolution, welcome to the UXlyze!" },
+      { status: 201 }
     );
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
