@@ -52,10 +52,9 @@ const LoginForm = () => {
   // if user logged in, redirect to home
   useEffect(() => {
     if (session?.user?.email) {
-      alert("User logged in");
-      router.push("/");
+      router.push(callbackUrl);
     }
-  }, [router, session]);
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
