@@ -55,7 +55,7 @@ const LoginForm = () => {
       alert("User logged in");
       router.push("/");
     }
-  }, []);
+  }, [router, session]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
