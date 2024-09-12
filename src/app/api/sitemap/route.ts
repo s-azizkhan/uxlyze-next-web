@@ -21,8 +21,8 @@ export async function GET(request: Request) {
     const urls = result.urlset.url.map((item: any) => item.loc[0]);
 
     return NextResponse.json({ urls });
-  } catch (error) {
-    console.error("Error fetching sitemap:", error);
+  } catch (error: any) {
+    console.error("Error fetching sitemap:", error.message);
     return NextResponse.json(
       { error: "Failed to fetch sitemap" },
       { status: 500 }

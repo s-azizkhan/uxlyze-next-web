@@ -9,7 +9,6 @@ import { ListStartIcon, SparkleIcon, SparklesIcon } from "lucide-react";
 interface UrlSelectorProps {
   urls: string[];
   onSubmit: (selectedUrl: string) => void;
-  onStartOver: () => void;
   loading: boolean;
 }
 
@@ -17,7 +16,6 @@ export default function UrlSelector({
   urls,
   onSubmit,
   loading,
-  onStartOver,
 }: UrlSelectorProps) {
   const [selectedUrl, setSelectedUrl] = useState(urls[0]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,14 +46,14 @@ export default function UrlSelector({
           placeholder="Filter URLs..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="mt-1 max-w-sm"
+          className="mt-1"
         />
       </div>
       <div>
         <Label className="text-sm sm:text-base font-medium">
           Select URL for report generation ({filteredUrls.length} URLs)
         </Label>
-        <ScrollArea className="h-[200px] sm:h-[300px] mt-2 border rounded-md overflow-y-auto">
+        <ScrollArea className="h-[200px] sm:h-[300px] mt-2 border rounded-md lg:w-full">
           <RadioGroup
             value={selectedUrl}
             onValueChange={setSelectedUrl}
@@ -80,25 +78,14 @@ export default function UrlSelector({
           </RadioGroup>
         </ScrollArea>
       </div>
-      <div className="flex flex-col lg:flex-row gap-2 items-center justify-center w-full">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onStartOver}
-          className=" text-sm sm:text-base order-2 lg:order-1"
-        >
-          <ListStartIcon className="mr-2" />
-          Start Over
-        </Button>
-        <Button
-          type="submit"
-          disabled={loading}
-          className=" text-sm sm:text-base mb-2 order-1 lg:order-2"
-        >
-          {loading ? "Generating Report..." : `Generate Report`}
-          <SparklesIcon className="ml-2" />
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        disabled={loading}
+        className=" text-sm sm:text-base w-full"
+      >
+        {loading ? "Generating Report..." : `Generate Report`}
+        <SparklesIcon className="ml-2" />
+      </Button>
     </form>
   );
 }

@@ -25,8 +25,6 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        // TODO: Implement DB credentials auth
-
         const user = await db
           .select()
           .from(usersTable)
@@ -46,10 +44,10 @@ export const authOptions: NextAuthOptions = {
           return {
             id: user[0].id,
             email: user[0].email,
+            name: user[0].name,
           };
         }
 
-        console.log("credentials", credentials);
         return null;
       },
     }),
@@ -61,8 +59,16 @@ export const authOptions: NextAuthOptions = {
       }
       return { ...token, ...user };
     },
+
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub as string;
+      }
+      return session;
+    },
   },
   pages: {
-    signIn: "/register", // TODO: Change to login
+    signIn: "/login",
+    newUser: "/register",
   },
 };

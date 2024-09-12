@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import ContinueWithGoogleBtn from "@/components/continue-with-google-btn";
 
 const formSchema = z.object({
@@ -45,8 +45,20 @@ const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const [isLoading, setIsLoading] = useState(false);
+
+  // get user from useSession
+  const { data: session } = useSession();
+  // if user logged in, redirect to home
+  useEffect(() => {
+    if (session?.user?.email) {
+      alert("User logged in");
+      router.push("/");
+    }
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     const data = await signIn("credentials", {
       email: values.email,
       password: values.password,
@@ -61,6 +73,7 @@ const LoginForm = () => {
       form.reset();
       router.push(callbackUrl);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -99,8 +112,8 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
-            Log in
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Log in"}
           </Button>
 
           <div className="mt-4 text-center text-sm space-y-2">

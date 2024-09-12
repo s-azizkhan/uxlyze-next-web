@@ -60,13 +60,27 @@ export default function CreateProjectForm() {
     try {
       const response = await fetch("/api/projects", {
         method: "POST",
-        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+        }),
       });
-      console.log(response);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log({ errorData });
+        throw new Error(errorData.error || "Failed to create project");
+      }
+
+      const project = await response.json();
       toast.success("Project created successfully!");
-      // router.push("/dashboard");
-    } catch (error) {
-      toast.error("Failed to create project. Please try again.");
+      router.push(`/dashboard/projects/${project.id}`);
+    } catch (e: any) {
+      toast.error(
+        e.message || "Failed to create project. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -122,7 +136,7 @@ export default function CreateProjectForm() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Description (optional)</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}

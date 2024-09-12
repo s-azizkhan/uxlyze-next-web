@@ -23,6 +23,9 @@ import ContinueWithGoogleBtn from "@/components/continue-with-google-btn";
 
 const formSchema = z
   .object({
+    name: z.string().min(1, {
+      message: "This field has to be filled.",
+    }),
     email: z
       .string()
       .min(1, {
@@ -92,6 +95,22 @@ const RegisterForm = () => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Doe" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your name used to call you in our app.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"

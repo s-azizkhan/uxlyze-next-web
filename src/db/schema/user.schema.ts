@@ -8,6 +8,8 @@ export const usersTable = pgTable("users", {
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date()),
+  mailingUid: text("mailing_uid"),
+  mailingProvider: text("mailing_provider"),
 });
 
 export type InsertUser = typeof usersTable.$inferInsert;
