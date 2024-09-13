@@ -4,13 +4,36 @@ import { ThemeProvider } from "next-themes";
 import SessionWrapper from "./SessionWrapper";
 import { Toaster } from "sonner";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
+import mixpanel from "mixpanel-browser";
 
 const gtmId = process.env.NEXT_PUBLIC_GA_ID as string;
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const mixpanelToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN as string;
+
+  if (mixpanelToken) {
+    mixpanel.init(mixpanelToken, {
+      debug: true,
+      track_pageview: true,
+      persistence: "localStorage",
+    });
+  }
+
   return (
     <SessionWrapper>
-      <html lang="en">
+      <html lang="en" className="scrollbar-none">
+        {process.env.NODE_ENV === "production" && (
+          <Script id="microsoft-clarity-analytics">
+            {`
+                (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "nxzj4u1l0r");
+              `}
+          </Script>
+        )}
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
         <ThemeProvider
           attribute="class"
