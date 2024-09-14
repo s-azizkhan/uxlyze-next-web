@@ -1,5 +1,7 @@
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { usersTable } from "./user.schema";
+import { reportsTable } from "./report.schema";
+import { relations } from "drizzle-orm";
 
 export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -18,3 +20,15 @@ export const projectsTable = pgTable("projects", {
 
 export type InsertProject = typeof projectsTable.$inferInsert;
 export type SelectProject = typeof projectsTable.$inferSelect;
+
+// relations
+export const projectRelation = relations(projectsTable, ({ one, many }) => ({
+  reports: many(reportsTable, {
+    relationName: "reports",
+  }),
+  user: one(usersTable, {
+    fields: [projectsTable.userId],
+    references: [usersTable.id],
+    relationName: "user",
+  }),
+}));
