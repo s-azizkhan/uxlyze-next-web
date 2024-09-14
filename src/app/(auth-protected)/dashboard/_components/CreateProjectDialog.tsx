@@ -22,11 +22,13 @@ import { IconLoader } from "@tabler/icons-react";
 interface CreateProjectDialogProps {
   isOpen: boolean;
   onClose: () => void;
+  refetch: () => void;
 }
 
 export default function CreateProjectDialog({
   isOpen,
   onClose,
+  refetch,
 }: CreateProjectDialogProps) {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -48,7 +50,7 @@ export default function CreateProjectDialog({
       if (response.ok) {
         const project = await response.json();
         toast.success("Project created successfully!");
-        router.push(`/dashboard/projects/${project.id}`);
+        refetch();
       } else {
         throw new Error("Failed to create project");
       }
@@ -88,10 +90,14 @@ export default function CreateProjectDialog({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating..." : "Create Project"}
-            {isLoading && <IconLoader className="ml-2 h-4 w-4 animate-spin" />}
-          </Button>
+          <div className="flex justify-end">
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Creating..." : "Create Project"}
+              {isLoading && (
+                <IconLoader className="ml-2 h-4 w-4 animate-spin" />
+              )}
+            </Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

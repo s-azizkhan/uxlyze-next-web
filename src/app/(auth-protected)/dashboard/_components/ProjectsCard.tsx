@@ -16,7 +16,7 @@ import CreateProjectDialog from "./CreateProjectDialog";
 import { useState } from "react";
 
 export default function ProjectsCard({ limit = 3 }) {
-  const { data: projects, isLoading, error } = useProjects(limit);
+  const { data: projects, isLoading, error, refetch } = useProjects(limit);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   if (isLoading) return <ProjectsSkeleton />;
@@ -104,6 +104,7 @@ export default function ProjectsCard({ limit = 3 }) {
       <CreateProjectDialog
         isOpen={isCreateDialogOpen}
         onClose={() => setIsCreateDialogOpen(false)}
+        refetch={refetch}
       />
     </>
   );
