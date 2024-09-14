@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       where: and(
         eq(reportsTable.webUrl, url),
         eq(reportsTable.userId, currentUser.id),
-        gt(reportsTable.createdAt, twoMinutesAgo),
+        gt(reportsTable.createdAt, twoMinutesAgo)
       ),
     });
 
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       where: and(
         eq(projectsTable.id, projectId),
         eq(projectsTable.userId, currentUser.id),
-        isNull(projectsTable.deletedAt),
+        isNull(projectsTable.deletedAt)
       ),
     });
     if (!project) {
@@ -76,9 +76,7 @@ export async function POST(request: NextRequest) {
         userId: currentUser.id,
         reportConfig,
       })
-      .returning({
-        id: reportsTable.id,
-      });
+      .returning();
 
     // update the count on the project
     await db
@@ -88,7 +86,7 @@ export async function POST(request: NextRequest) {
       })
       .where(eq(projectsTable.id, projectId));
 
-    return NextResponse.json({ data: report[0] }, { status: 201 });
+    return NextResponse.json(report[0], { status: 201 });
   } catch (error) {
     console.error("Error creating report:", error);
     return NextResponse.json(

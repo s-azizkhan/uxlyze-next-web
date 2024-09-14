@@ -3,6 +3,7 @@ import { PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
 import ProjectsList from "./_components/ProjectsList";
 import { metaTitlePostFix } from "@/app/layout";
+import ProjectsCard from "../_components/ProjectsCard";
 
 export const metadata = {
   title: "My Projects | " + metaTitlePostFix,
@@ -21,7 +22,9 @@ export default function ProjectsPage() {
           </Button>
         </Link>
       </div>
-      <ProjectsList />
+      {/* TODO: uncomment this */}
+      {/* <ProjectsList /> */}
+      <ProjectsCard limit={40} />
     </div>
   );
 }

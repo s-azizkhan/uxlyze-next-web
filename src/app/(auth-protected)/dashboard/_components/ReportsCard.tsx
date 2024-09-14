@@ -30,7 +30,7 @@ export default function ReportsCard() {
           <h2 className="text-2xl font-semibold md:text-3xl">Recent Reports</h2>
           <div className="flex gap-2">
             {/* TODO: show this button */}
-            <Button onClick={() => setIsCreateDialogOpen(true)} className="hidden">
+            <Button onClick={() => setIsCreateDialogOpen(true)} className="">
               <PlusIcon className="mr-2 h-4 w-4" />
               Generate Report
             </Button>

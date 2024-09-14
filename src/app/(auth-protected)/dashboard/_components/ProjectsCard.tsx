@@ -15,14 +15,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import CreateProjectDialog from "./CreateProjectDialog";
 import { useState } from "react";
 
-export default function ProjectsCard() {
-  const { data: projects, isLoading, error } = useProjects(3);
+export default function ProjectsCard({ limit = 3 }) {
+  const { data: projects, isLoading, error } = useProjects(limit);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   if (isLoading) return <ProjectsSkeleton />;
   if (error) return <div>Error loading projects</div>;
 
-  console.log({ projects });
   return (
     <>
       {projects && projects.length > 0 ? (
