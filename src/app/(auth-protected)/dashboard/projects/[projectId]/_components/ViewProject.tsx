@@ -21,16 +21,20 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { IconLoader } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import { SelectProject } from "@/db/schema";
 
 export default function ViewProject({ projectId }: { projectId: string }) {
   const {
     data: project,
     isLoading: isProjectLoading,
     error,
+    refetch,
   } = useProject(projectId);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [editedProject, setEditedProject] = useState(project);
+  const [editedProject, setEditedProject] = useState<SelectProject | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   if (isProjectLoading) return <SkeletonLoading />;
@@ -40,7 +44,10 @@ export default function ViewProject({ projectId }: { projectId: string }) {
   const router = useRouter();
 
   const handleUpdateProject = async () => {
+    if (!editedProject) return;
+
     try {
+      setIsLoading(true);
       const response = await fetch(`/api/projects/${projectId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -50,12 +57,16 @@ export default function ViewProject({ projectId }: { projectId: string }) {
       if (response.ok) {
         toast.success("Project updated successfully");
         setIsEditDialogOpen(false);
+        // Refresh the project data
+        refetch();
       } else {
         toast.error("Failed to update project");
       }
     } catch (error) {
       console.error("Error updating project:", error);
       toast.error("An error occurred while updating the project");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,80 +96,56 @@ export default function ViewProject({ projectId }: { projectId: string }) {
     <div className="container mx-auto px-4 py-8">
       {project ? (
         <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-2xl font-semibold md:text-3xl">
-              {project.name}
-            </h1>
-            <div className="flex space-x-2">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+            <div className="flex items-center mb-4 md:mb-0">
+              <h1 className="text-3xl font-bold mr-3">{project.name}</h1>
+              <span className="px-3 py-1 text-sm font-semibold rounded-full bg-primary/10 text-primary">
+                {project.type}
+              </span>
+            </div>
+            <div className="flex gap-2">
               <Button
-                onClick={() => setIsEditDialogOpen(true)}
+                onClick={() => {
+                  setEditedProject(project);
+                  setIsEditDialogOpen(true);
+                }}
                 variant="outline"
+                size="sm"
+                className="rounded-xl"
               >
-                <EditIcon className="h-5 w-5 mr-2" />
+                <EditIcon className="h-4 w-4 mr-2" />
                 Edit
               </Button>
               <Button
                 onClick={() => setIsDeleteDialogOpen(true)}
                 variant="outline"
-                className="text-red-500"
+                size="sm"
+                className="text-red-500 hover:bg-red-50 rounded-xl"
               >
-                <TrashIcon className="h-5 w-5 mr-2" />
+                <TrashIcon className="h-4 w-4 mr-2" />
                 Delete
               </Button>
               <Link href={`/dashboard/projects/${project.id}/reports/new`}>
-                <Button>
-                  <PlusSignIcon className="h-5 w-5 mr-2" />
+                <Button size="sm" className="bg-primary text-white rounded-xl">
+                  <PlusSignIcon className="h-4 w-4 mr-2" />
                   New Report
                 </Button>
               </Link>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Project Type</CardTitle>
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-8">
+            <Card className="shadow-sm hover:shadow-md transition-shadow duration-300">
+              <CardHeader className="bg-gray-50">
+                <CardTitle className="text-lg">Description</CardTitle>
               </CardHeader>
-              <CardContent>{project.type}</CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Figma URL</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href={project.figmaUrl || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  {project.figmaUrl}
-                </a>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Website URL</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href={project.websiteUrl || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  {project.websiteUrl}
-                </a>
+              <CardContent className="pt-4">
+                <p className="text-sm text-muted-foreground">
+                  {project.description || "No description provided."}
+                </p>
               </CardContent>
             </Card>
           </div>
-
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>Description</CardTitle>
-            </CardHeader>
-            <CardContent>{project.description}</CardContent>
-          </Card>
 
           <h2 className="text-xl font-semibold mb-4">Reports</h2>
           {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -183,112 +170,99 @@ export default function ViewProject({ projectId }: { projectId: string }) {
           </Card>
         ))}
       </div> */}
-
-          {/* Edit Dialog */}
-          {editedProject && (
-            <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Edit Project</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <label htmlFor="name" className="text-right">
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      value={editedProject.name}
-                      onChange={(e) =>
-                        setEditedProject({
-                          ...editedProject,
-                          name: e.target.value,
-                        })
-                      }
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <label htmlFor="type" className="text-right">
-                      Type
-                    </label>
-                    <Input
-                      id="type"
-                      value={editedProject.type}
-                      onChange={(e) =>
-                        setEditedProject({
-                          ...editedProject,
-                          type: e.target.value,
-                        })
-                      }
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <label htmlFor="description" className="text-right">
-                      Description
-                    </label>
-                    <Textarea
-                      id="description"
-                      value={editedProject.description || ""}
-                      onChange={(e) =>
-                        setEditedProject({
-                          ...editedProject,
-                          description: e.target.value,
-                        })
-                      }
-                      className="col-span-3"
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button onClick={handleUpdateProject}>Update Project</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          )}
-
-          {/* Delete Dialog */}
-          {isDeleteDialogOpen && (
-            <Dialog
-              open={isDeleteDialogOpen}
-              onOpenChange={setIsDeleteDialogOpen}
-            >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Confirm Deletion</DialogTitle>
-                </DialogHeader>
-                <p>
-                  Are you sure you want to delete this project? This action
-                  cannot be undone.
-                </p>
-                <DialogFooter>
-                  {!isLoading && (
-                    <Button
-                      onClick={() => setIsDeleteDialogOpen(false)}
-                      variant="outline"
-                    >
-                      Cancel
-                    </Button>
-                  )}
-                  <Button
-                    onClick={handleDeleteProject}
-                    variant="destructive"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <IconLoader className="ml-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      "Delete"
-                    )}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          )}
         </div>
       ) : (
         <SkeletonLoading />
+      )}
+
+      {/* Edit Dialog */}
+      {editedProject && (
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Project</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <label htmlFor="name" className="text-right">
+                  Name
+                </label>
+                <Input
+                  id="name"
+                  value={editedProject.name}
+                  onChange={(e) =>
+                    setEditedProject({
+                      ...editedProject,
+                      name: e.target.value,
+                    })
+                  }
+                  className="col-span-3"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <label htmlFor="description" className="text-right">
+                  Description
+                </label>
+                <Textarea
+                  id="description"
+                  value={editedProject.description || ""}
+                  onChange={(e) =>
+                    setEditedProject({
+                      ...editedProject,
+                      description: e.target.value,
+                    })
+                  }
+                  className="col-span-3"
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button disabled={isLoading} onClick={handleUpdateProject}>
+                {isLoading ? (
+                  <IconLoader className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Update Project"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {/* Delete Dialog */}
+      {isDeleteDialogOpen && (
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Confirm Deletion</DialogTitle>
+            </DialogHeader>
+            <p>
+              Are you sure you want to delete this project? This action cannot
+              be undone.
+            </p>
+            <DialogFooter>
+              {!isLoading && (
+                <Button
+                  onClick={() => setIsDeleteDialogOpen(false)}
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
+              )}
+              <Button
+                onClick={handleDeleteProject}
+                variant="destructive"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <IconLoader className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Delete"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );
