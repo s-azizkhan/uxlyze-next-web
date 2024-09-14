@@ -19,9 +19,9 @@ export async function GET(
         eq(projectsTable.id, params.projectId),
         eq(projectsTable.userId, currentUser.id)
       ),
-      //   with: {
-      //     reports: true,
-      //   },
+      with: {
+        reports: true,
+      },
     });
 
     if (!project) {

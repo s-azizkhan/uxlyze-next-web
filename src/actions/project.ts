@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { projectsTable } from "@/db/schema/project.schema";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export async function getProjectsByUserId(
   userId: string,
@@ -8,12 +8,12 @@ export async function getProjectsByUserId(
   offset: number
 ) {
   try {
-    const projects = await db
-      .select()
-      .from(projectsTable)
-      .where(eq(projectsTable.userId, userId))
-      .limit(limit)
-      .offset(offset);
+    const projects = await db.query.projectsTable.findMany({
+      where: eq(projectsTable.userId, userId),
+      limit,
+      offset,
+      orderBy: (projects, { desc }) => [desc(projects.createdAt)],
+    });
     return projects;
   } catch (error) {
     console.error("Error fetching projects:", error);

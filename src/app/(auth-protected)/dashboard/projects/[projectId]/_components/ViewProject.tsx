@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusSignIcon } from "hugeicons-react";
+import { EyeIcon, PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProject";
@@ -148,28 +148,47 @@ export default function ViewProject({ projectId }: { projectId: string }) {
           </div>
 
           <h2 className="text-xl font-semibold mb-4">Reports</h2>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {project.reports && project.reports.map((report) => (
-          <Card key={report.id}>
-            <CardHeader>
-              <CardTitle>{report.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">
-                Created on: {report.createdAt}
-              </p>
-              <Link
-                href={`/dashboard/projects/${project.id}/reports/${report.id}`}
-              >
-                <Button variant="outline" className="w-full">
-                  <EyeIcon className="mr-2 h-4 w-4" />
-                  View Report
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ))}
-      </div> */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {project.reports &&
+              project.reports.map((report) => (
+                <Card
+                  key={report.id}
+                  className="hover:shadow-lg transition-shadow"
+                >
+                  <CardHeader>
+                    <CardTitle>{report.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Created on:{" "}
+                      {report.createdAt
+                        ? new Date(report.createdAt).toLocaleDateString()
+                        : "N/A"}
+                    </p>
+                    <p className="text-sm font-semibold mb-4">
+                      Status:{" "}
+                      <span
+                        className={`capitalize ${
+                          report.status === "completed"
+                            ? "text-green-600"
+                            : "text-yellow-600"
+                        }`}
+                      >
+                        {report.status}
+                      </span>
+                    </p>
+                    <Link
+                      href={`/dashboard/projects/${project.id}/reports/${report.id}`}
+                    >
+                      <Button variant="outline" className="w-full">
+                        <EyeIcon className="mr-2 h-4 w-4" />
+                        View Report
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
         </div>
       ) : (
         <SkeletonLoading />

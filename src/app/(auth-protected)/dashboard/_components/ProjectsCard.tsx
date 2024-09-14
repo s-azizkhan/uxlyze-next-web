@@ -12,13 +12,17 @@ import {
 } from "@/components/ui/card";
 import { useProjects } from "@/hooks/useProjects";
 import { Skeleton } from "@/components/ui/skeleton";
+import CreateProjectDialog from "./CreateProjectDialog";
+import { useState } from "react";
 
 export default function ProjectsCard() {
   const { data: projects, isLoading, error } = useProjects(3);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   if (isLoading) return <ProjectsSkeleton />;
   if (error) return <div>Error loading projects</div>;
 
+  console.log({ projects });
   return (
     <>
       {projects && projects.length > 0 ? (
@@ -50,6 +54,9 @@ export default function ProjectsCard() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
+                  {project.reportCount && project.reportCount > 0
+                    ? `Reports: ${project.reportCount} | `
+                    : "No reports yet"}{" "}
                   Last updated:{" "}
                   {project.updatedAt
                     ? new Date(project.updatedAt).toLocaleDateString()
@@ -82,19 +89,26 @@ export default function ProjectsCard() {
             <p className="text-sm text-muted-foreground mb-4">
               Start by adding a new project to analyze UI & UX designs.
             </p>
-            <Link href="/dashboard/projects/new">
-              <Button size="lg" className="rounded-xl">
-                <PlusSignIcon className="h-5 w-5 mr-2" />
-                Create Your First Project
-              </Button>
-            </Link>
+            {/* <Link href="/dashboard/projects/new"> */}
+            <Button
+              size="lg"
+              className="rounded-xl"
+              onClick={() => setIsCreateDialogOpen(true)}
+            >
+              <PlusSignIcon className="h-5 w-5 mr-2" />
+              Create Your First Project
+            </Button>
+            {/* </Link> */}
           </CardContent>
         </Card>
       )}
+      <CreateProjectDialog
+        isOpen={isCreateDialogOpen}
+        onClose={() => setIsCreateDialogOpen(false)}
+      />
     </>
   );
 }
-
 
 function ProjectsSkeleton() {
   return (

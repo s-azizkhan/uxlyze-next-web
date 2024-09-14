@@ -117,13 +117,11 @@ export default function CreateReport({ projectId }: { projectId: string }) {
 
       if (response.ok) {
         const resp = await response.json();
-
         toast({
-          title: `Report Generated for: ${resp.data.title}`,
-          description: "The report has been generated successfully.",
+          title: `Report Generation Started`,
+          description: "You will be redirected to the report page.",
         });
-        // TODO: update the route to the report page
-        router.push(`/dashboard/projects/${projectId}/reports/1`);
+        router.push(`/dashboard/projects/${projectId}/reports/${resp.data.id}`);
       } else {
         throw new Error("Failed to Generate Report");
       }

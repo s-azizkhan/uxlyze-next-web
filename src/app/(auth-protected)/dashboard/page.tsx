@@ -12,7 +12,6 @@ export const metadata = {
 };
 
 export default async function DashboardPage() {
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
@@ -27,19 +26,7 @@ export default async function DashboardPage() {
       <ProjectsCard />
 
       {/* New reports section */}
-      <div className="mt-12">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold md:text-3xl">Recent Reports</h2>
-          <Link href="/dashboard/reports">
-            <Button variant="outline">
-              View All Reports
-              <ArrowRight01Icon className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-
-        <ReportsCard />
-      </div>
+      <ReportsCard />
     </div>
   );
 }

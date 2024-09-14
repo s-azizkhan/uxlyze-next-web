@@ -1,7 +1,7 @@
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { usersTable } from "./user.schema";
-import { reportsTable } from "./report.schema";
 import { relations } from "drizzle-orm";
+import { reportsTable } from "./report.schema";
+import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { usersTable } from "./user.schema";
 
 export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -12,6 +12,7 @@ export const projectsTable = pgTable("projects", {
   figmaUrl: text("figma_url"),
   websiteUrl: text("website_url"),
   imageUrl: text("image_url"),
+  reportCount: integer("report_count").default(0),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
@@ -23,12 +24,9 @@ export type SelectProject = typeof projectsTable.$inferSelect;
 
 // relations
 export const projectRelation = relations(projectsTable, ({ one, many }) => ({
-  reports: many(reportsTable, {
-    relationName: "reports",
-  }),
+  reports: many(reportsTable),
   user: one(usersTable, {
     fields: [projectsTable.userId],
     references: [usersTable.id],
-    relationName: "user",
   }),
 }));
