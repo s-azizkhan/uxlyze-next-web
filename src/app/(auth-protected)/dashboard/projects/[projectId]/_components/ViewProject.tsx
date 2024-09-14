@@ -24,6 +24,8 @@ import { useRouter } from "next/navigation";
 import { SelectProject } from "@/db/schema";
 
 export default function ViewProject({ projectId }: { projectId: string }) {
+  const router = useRouter();
+
   const {
     data: project,
     isLoading: isProjectLoading,
@@ -40,8 +42,6 @@ export default function ViewProject({ projectId }: { projectId: string }) {
   if (isProjectLoading) return <SkeletonLoading />;
   if (error) return <div>Error loading project</div>;
   if (!project) return <div>Project not found</div>;
-
-  const router = useRouter();
 
   const handleUpdateProject = async () => {
     if (!editedProject) return;

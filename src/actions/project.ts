@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { projectsTable } from "@/db/schema/project.schema";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, isNotNull } from "drizzle-orm";
 
 export async function getProjectsByUserId(
   userId: string,
@@ -9,7 +9,10 @@ export async function getProjectsByUserId(
 ) {
   try {
     const projects = await db.query.projectsTable.findMany({
-      where: eq(projectsTable.userId, userId),
+      where: and(
+        eq(projectsTable.userId, userId),
+        isNotNull(projectsTable.deletedAt)
+      ),
       limit,
       offset,
       orderBy: (projects, { desc }) => [desc(projects.createdAt)],
