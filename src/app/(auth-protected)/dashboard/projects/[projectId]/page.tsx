@@ -13,11 +13,5 @@ export default async function ViewProjectPage({
 }: {
   params: { projectId: string };
 }) {
-  const project = await getProjectById(params.projectId);
-
-  if (!project) {
-    return <div>Project not found</div>;
-  }
-
-  return <ViewProject project={project} />;
+  return <ViewProject projectId={params.projectId} />;
 }

@@ -4,7 +4,7 @@ import { usersTable } from "./user.schema";
 export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").references(() => usersTable.id),
-  name: text("name"),
+  name: text("name").notNull(),
   type: text("type"),
   description: text("description"),
   figmaUrl: text("figma_url"),

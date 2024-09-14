@@ -1,14 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight01Icon, EyeIcon, PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
-import Image from "next/image";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { metaTitlePostFix } from "@/app/layout";
 import ProjectsCard from "./_components/ProjectsCard";
 import ReportsCard from "./_components/ReportsCard";
@@ -19,7 +11,8 @@ export const metadata = {
   description: "View your projects and reports",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">

@@ -14,12 +14,10 @@ export async function authProtectServerSide(req: any) {
     return false;
   }
 
-  console.log({ userSession });
-
   const dbUser = await db.query.usersTable.findFirst({
     where: eq(usersTable.id, userSession.sub as string),
   });
-  console.log({ dbUser });
+  
   if (!dbUser) {
     return false;
   }

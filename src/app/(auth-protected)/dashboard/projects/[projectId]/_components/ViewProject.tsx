@@ -1,11 +1,19 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SelectProject } from "@/db/schema/project.schema";
+import { useProject } from "@/hooks/useProject";
 
-export default function ViewProject({ project }: { project: SelectProject }) {
+export default function ViewProject({ projectId }: { projectId: string }) {
+  const { data: project, isLoading, error } = useProject(projectId);
+
+  if (isLoading) return <SkeletonLoading />;
+  if (error) return <div>Error loading project</div>;
+  if (!project) return <div>Project not found</div>;
+
   return (
     <div className="container mx-auto px-4 py-8">
       {project ? (

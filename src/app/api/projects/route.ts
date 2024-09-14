@@ -3,13 +3,33 @@ import { db } from "@/db";
 import { projectsTable } from "@/db/schema/project.schema";
 import { and, eq } from "drizzle-orm";
 import { authProtectServerSide } from "@/utils/auth";
+import { getProjectsByUserId } from "@/actions/project";
+
+export async function GET(request: NextRequest) {
+  try {
+    const userData = await authProtectServerSide(request);
+    if (!userData || !userData.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const limit = parseInt(searchParams.get("limit") as string) || 4;
+    const offset = parseInt(searchParams.get("offset") as string) || 0;
+
+    const projects = await getProjectsByUserId(userData.id, limit, offset);
+
+    return NextResponse.json(projects, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
     const userData = await authProtectServerSide(request);
 
     if (!userData) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { name, type, description, figmaUrl, websiteUrl } =

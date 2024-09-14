@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { EyeIcon, PlusSignIcon } from "hugeicons-react";
 import Link from "next/link";
@@ -13,12 +14,11 @@ import {
 import { useProjects } from "@/hooks/useProjects";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ProjectsCard() {
-  const { data: projects, isLoading, error } = useProjects(3);
+export default function ProjectsList() {
+  const { data: projects, isLoading, error } = useProjects(40, 0);
 
   if (isLoading) return <ProjectsSkeleton />;
-  if (error) return <div>Error loading projects</div>;
-
+  if (error) return <div>Error loading your projects</div>;
   return (
     <>
       {projects && projects.length > 0 ? (
@@ -50,7 +50,7 @@ export default function ProjectsCard() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Last updated:{" "}
+                  Reports: 0 | Last updated:{" "}
                   {project.updatedAt
                     ? new Date(project.updatedAt).toLocaleDateString()
                     : "N/A"}
@@ -65,7 +65,7 @@ export default function ProjectsCard() {
                     variant="default"
                     className="w-full transition-colors duration-300"
                   >
-                    View Project
+                    View Reports
                     <EyeIcon className="size-5 ml-2" />
                   </Button>
                 </Link>
@@ -95,19 +95,18 @@ export default function ProjectsCard() {
   );
 }
 
-
 function ProjectsSkeleton() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[...Array(3)].map((_, index) => (
+      {[...Array(6)].map((_, index) => (
         <Card key={index} className="overflow-hidden">
           <Skeleton className="h-48 w-full" />
           <CardContent className="p-4">
             <div className="flex justify-between items-center mb-2">
-              <Skeleton className="h-6 w-1/2" />
+              <Skeleton className="h-6 w-2/3" />
               <Skeleton className="h-6 w-1/4" />
             </div>
-            <Skeleton className="h-4 w-3/4 mb-4" />
+            <Skeleton className="h-4 w-full mt-2" />
           </CardContent>
           <CardFooter className="p-4 pt-0">
             <Skeleton className="h-10 w-full" />
