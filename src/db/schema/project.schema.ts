@@ -5,7 +5,7 @@ export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").references(() => usersTable.id),
   name: text("name").notNull(),
-  type: text("type"),
+  type: text("type").notNull(),
   description: text("description"),
   figmaUrl: text("figma_url"),
   websiteUrl: text("website_url"),

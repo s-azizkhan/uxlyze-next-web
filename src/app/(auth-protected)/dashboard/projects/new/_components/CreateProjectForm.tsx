@@ -17,8 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
-import { ArrowLeftIcon, CreativeCommonsIcon } from "lucide-react";
-import Link from "next/link";
+import { ArrowLeftIcon } from "lucide-react";
 import {
   Select,
   SelectTrigger,
@@ -28,9 +27,8 @@ import {
 } from "@/components/ui/select";
 import Image from "next/image";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { IconCheck, IconLoader2 } from "@tabler/icons-react";
-import { FlashIcon, GoForward10SecIcon } from "hugeicons-react";
-import { useSession } from "next-auth/react";
+import { IconLoader } from "@tabler/icons-react";
+import { FlashIcon } from "hugeicons-react";
 
 const formSchema = z.object({
   name: z.string().min(1, "Project name is required"),
@@ -195,7 +193,7 @@ export default function CreateProjectForm() {
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Creating..." : "Create Project"}
                 {isLoading ? (
-                  <IconLoader2 className="w-4 h-4 ml-2 animate-spin" />
+                  <IconLoader className="ml-2 h-4 w-4 animate-spin" />
                 ) : (
                   <FlashIcon className="w-4 h-4 ml-2" />
                 )}
