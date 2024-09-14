@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, CreativeCommonsIcon } from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -27,6 +27,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Image from "next/image";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { IconCheck, IconLoader2 } from "@tabler/icons-react";
+import { FlashIcon, GoForward10SecIcon } from "hugeicons-react";
+import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
   name: z.string().min(1, "Project name is required"),
@@ -43,11 +47,12 @@ const formSchema = z.object({
 export default function CreateProjectForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [parent] = useAutoAnimate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: "My Project",
       type: "",
       description: "",
       figmaUrl: "",
@@ -60,38 +65,36 @@ export default function CreateProjectForm() {
     try {
       const response = await fetch("/api/projects", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...values,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.log({ errorData });
-        throw new Error(errorData.error || "Failed to create project");
+        throw new Error(
+          (await response.json()).error || "Failed to create project"
+        );
       }
 
       const project = await response.json();
       toast.success("Project created successfully!");
       router.push(`/dashboard/projects/${project.id}`);
     } catch (e: any) {
-      toast.error(
-        e.message || "Failed to create project. Please try again."
-      );
+      toast.error(e.message || "Failed to create project. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
+    <div className="flex flex-col md:flex-row items-start gap-12 max-w-6xl mx-auto">
       <div className="w-full md:w-1/2 order-1">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8"
+            ref={parent}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FormField
                 control={form.control}
                 name="name"
@@ -120,10 +123,10 @@ export default function CreateProjectForm() {
                           <SelectValue placeholder="Select a project type" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent defaultValue="website">
                         <SelectItem value="website">Website</SelectItem>
-                        {/* <SelectItem value="mobile-app">Mobile App</SelectItem> */}
                         <SelectItem value="web-app">Web App</SelectItem>
+                        {/* <SelectItem value="mobile-app">Mobile App</SelectItem> */}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -148,52 +151,60 @@ export default function CreateProjectForm() {
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="figmaUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Figma URL (optional)</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Enter Figma URL" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="websiteUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Website URL (optional)</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Enter website URL" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex justify-between pt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => router.push("/dashboard")}
-                className="w-[48%]"
-              >
-                <ArrowLeftIcon className="w-4 h-4 mr-2" />
-                Cancel
-              </Button>
-              <Button type="submit" disabled={isLoading} className="w-[48%]">
+            {form.watch("type") === "web" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <FormField
+                  control={form.control}
+                  name="figmaUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Figma URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Enter Figma URL" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="websiteUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Website URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Enter website URL" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+            <div className="flex justify-end space-x-4 pt-8">
+              {!isLoading && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => router.push("/dashboard")}
+                >
+                  <ArrowLeftIcon className="w-4 h-4 mr-2" />
+                  Cancel
+                </Button>
+              )}
+              <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Creating..." : "Create Project"}
+                {isLoading ? (
+                  <IconLoader2 className="w-4 h-4 ml-2 animate-spin" />
+                ) : (
+                  <FlashIcon className="w-4 h-4 ml-2" />
+                )}
               </Button>
             </div>
           </form>
         </Form>
       </div>
-      <div className="w-full md:w-1/2 order-2 hidden md:block">
+      <div className="w-full md:w-1/2 order-2 hidden md:block sticky top-8">
         <Image
           src="https://illustrations.popsy.co/violet/paper-documents.svg"
           alt="Create Project"

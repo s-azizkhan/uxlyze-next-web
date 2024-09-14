@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       .from(projectsTable)
       .where(
         and(
-          eq(projectsTable.name, name),
+          eq(projectsTable.name, name.trim()),
           eq(projectsTable.userId, userData.id),
           eq(projectsTable.type, type)
         )
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     const newProjectData = {
       userId: userData.id,
-      name,
+      name: name.trim(),
       type,
       description,
       figmaUrl,

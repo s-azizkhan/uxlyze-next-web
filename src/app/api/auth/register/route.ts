@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { InsertUser, usersTable } from "@/db/schema/user.schema";
+import { isProduction } from "@/lib/helpers";
 import { loops } from "@/lib/loops";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -34,21 +35,24 @@ export async function POST(request: Request) {
       password: hashedPassword,
     };
 
-    // Create a contact in Loops to send email
-    const loopsUser = await loops.findContact({ email });
-    if (loopsUser.length === 0) {
-      const newLoopsUser = await loops.createContact(email, {
-        name: name,
-      });
-      if (newLoopsUser.success) {
-        newUserData.mailingUid = newLoopsUser.id;
-        newUserData.mailingProvider = "LOOPS";
+    // Create a contact in Loops to send email only on production
+
+    if (isProduction()) {
+      const loopsUser = await loops.findContact({ email });
+      if (loopsUser.length === 0) {
+        const newLoopsUser = await loops.createContact(email, {
+          name: name,
+        });
+        if (newLoopsUser.success) {
+          newUserData.mailingUid = newLoopsUser.id;
+          newUserData.mailingProvider = "LOOPS";
+        } else {
+          console.log("Error creating contact in Loops ", { newLoopsUser });
+        }
       } else {
-        console.log("Error creating contact in Loops ", { newLoopsUser });
+        newUserData.mailingUid = loopsUser[0].id;
+        newUserData.mailingProvider = "LOOPS";
       }
-    } else {
-      newUserData.mailingUid = loopsUser[0].id;
-      newUserData.mailingProvider = "LOOPS";
     }
 
     await db.insert(usersTable).values(newUserData);

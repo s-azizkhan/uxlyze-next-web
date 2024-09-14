@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ContinueWithGoogleBtn from "@/components/continue-with-google-btn";
+import { useSession } from "next-auth/react";
 
 const formSchema = z
   .object({
@@ -54,6 +55,16 @@ const formSchema = z
 
 const RegisterForm = () => {
   const router = useRouter();
+
+  // get user from useSession
+  const { data: session } = useSession();
+  // if user logged in, redirect to home
+  useEffect(() => {
+    if (session?.user?.email) {
+      router.push("/dashboard");
+    }
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
