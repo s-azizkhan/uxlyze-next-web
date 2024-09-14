@@ -90,7 +90,10 @@ export async function DELETE(
     return NextResponse.json({ error: "Project not found" }, { status: 404 });
   }
 
-  await db.delete(projectsTable).where(eq(projectsTable.id, projectId));
+  await db
+    .update(projectsTable)
+    .set({ deletedAt: new Date() })
+    .where(eq(projectsTable.id, projectId));
 
   return NextResponse.json({ message: "Project deleted successfully" });
 }

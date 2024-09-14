@@ -29,9 +29,10 @@ export default function ReportsCard() {
         <div className="flex items-center justify-between mb-8 flex-col md:flex-row space-y-4 md:space-y-0">
           <h2 className="text-2xl font-semibold md:text-3xl">Recent Reports</h2>
           <div className="flex gap-2">
-            <Button onClick={() => setIsCreateDialogOpen(true)}>
+            {/* TODO: show this button */}
+            <Button onClick={() => setIsCreateDialogOpen(true)} className="hidden">
               <PlusIcon className="mr-2 h-4 w-4" />
-              Create Report
+              Generate Report
             </Button>
             <Link href="/dashboard/reports">
               <Button variant="outline">
@@ -103,7 +104,7 @@ function NoReportsCard({ onCreateReport }: { onCreateReport: () => void }) {
       <CardFooter className="flex justify-center">
         <Button className="w-full sm:w-auto" onClick={onCreateReport}>
           <PlusIcon className="mr-2 h-4 w-4" />
-          Create Report
+          Generate Report
         </Button>
       </CardFooter>
     </Card>

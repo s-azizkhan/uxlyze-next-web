@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { IconLoader } from "@tabler/icons-react";
 
 interface CreateProjectDialogProps {
   isOpen: boolean;
@@ -89,6 +90,7 @@ export default function CreateProjectDialog({
           />
           <Button type="submit" disabled={isLoading}>
             {isLoading ? "Creating..." : "Create Project"}
+            {isLoading && <IconLoader className="ml-2 h-4 w-4 animate-spin" />}
           </Button>
         </form>
       </DialogContent>

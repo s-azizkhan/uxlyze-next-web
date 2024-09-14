@@ -115,22 +115,21 @@ export default function CreateReport({ projectId }: { projectId: string }) {
         }),
       });
 
+      const resp = await response.json();
       if (response.ok) {
-        const resp = await response.json();
         toast({
           title: `Report Generation Started`,
           description: "You will be redirected to the report page.",
         });
         router.push(`/dashboard/projects/${projectId}/reports/${resp.data.id}`);
       } else {
-        throw new Error("Failed to Generate Report");
+        throw new Error(resp.error || "Failed to Generate Report");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating report:", error);
       toast({
         title: "Error",
-        description:
-          "An error occurred while creating the report. Please try again.",
+        description: error?.message || "Failed to Generate Report",
         variant: "destructive",
       });
     } finally {

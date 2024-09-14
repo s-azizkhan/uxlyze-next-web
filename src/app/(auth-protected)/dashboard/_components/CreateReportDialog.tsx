@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useProjects } from "@/hooks/useProjects";
+import { IconLoader } from "@tabler/icons-react";
 
 interface CreateReportDialogProps {
   isOpen: boolean;
@@ -52,10 +53,10 @@ export default function CreateReportDialog({
         toast.success("Report created successfully!");
         router.push(`/dashboard/projects/${projectId}/reports/${report.id}`);
       } else {
-        throw new Error("Failed to create report");
+        throw new Error("Failed to generate report");
       }
     } catch (error) {
-      toast.error("Failed to create report. Please try again.");
+      toast.error("Failed to generate report. Please try again.");
     } finally {
       setIsLoading(false);
       onClose();
@@ -66,38 +67,48 @@ export default function CreateReportDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create New Report</DialogTitle>
+          <DialogTitle>Generate New Report</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            placeholder="Report Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <Select onValueChange={setProjectId} required>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a project" />
-            </SelectTrigger>
-            <SelectContent>
-              {projects?.map((project) => (
-                <SelectItem key={project.id} value={project.id}>
-                  {project.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Input
-            placeholder="Website URL"
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            required
-          />
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating..." : "Create Report"}
-          </Button>
-        </form>
+        {projects && projects.length > 0 ? (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              placeholder="Report Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <Select onValueChange={setProjectId} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a project" />
+              </SelectTrigger>
+              <SelectContent>
+                {projects?.map((project) => (
+                  <SelectItem key={project.id} value={project.id}>
+                    {project.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Input
+              placeholder="Website URL"
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              required
+            />
+
+            <div className="flex items-center justify-end">
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? "Generating..." : "Generate Report"}
+                {isLoading && (
+                  <IconLoader className="ml-2 h-4 w-4 animate-spin" />
+                )}
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <div>Please create a project first to generate a report.</div>
+        )}
       </DialogContent>
     </Dialog>
   );
