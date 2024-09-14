@@ -17,6 +17,7 @@ export const projectsTable = pgTable("projects", {
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date()),
+  deletedAt: timestamp("deleted_at"),
 });
 
 export type InsertProject = typeof projectsTable.$inferInsert;
