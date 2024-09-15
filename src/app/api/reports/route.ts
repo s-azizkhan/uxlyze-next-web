@@ -4,6 +4,7 @@ import { reportsTable } from "@/db/schema/report.schema";
 import { authProtectServerSide } from "@/utils/auth";
 import { projectsTable } from "@/db/schema";
 import { and, eq, sql, gt, isNull } from "drizzle-orm";
+import { calculateCreditCost, deductCreditForReport, getUserCredit } from "@/actions/analysis-credit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,6 +29,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const reportCost = calculateCreditCost({
+      includePreview,
+      includePSI,
+      includeAIAnalysis,
+    });
+    const userCredit = await getUserCredit(currentUser.id);
+    if (!userCredit) {
+      return NextResponse.json(
+        { error: "Your credit not found, please top up your credit to generate a report" },
+        { status: 404 }
+      );
+    }
+
+    if (userCredit.balance < reportCost) {
+      return NextResponse.json(
+        {
+          error:
+            "Insufficient credit, please top up your credit to generate a report",
+        },
+        { status: 400 }
+      );
+    }
     // Check for existing reports within the last 2 minutes
     const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000);
     const existingReport = await db.query.reportsTable.findFirst({
@@ -85,6 +108,8 @@ export async function POST(request: NextRequest) {
         reportCount: sql`${project.reportCount} + 1`,
       })
       .where(eq(projectsTable.id, projectId));
+      // deduct credit
+      await deductCreditForReport(currentUser.id, report[0].id, reportCost);
 
     return NextResponse.json(report[0], { status: 201 });
   } catch (error) {
