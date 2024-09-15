@@ -59,17 +59,17 @@ export default function CreateReportDialog({
         }),
       });
 
+      const resp = await response.json();
       if (response.ok) {
-        const report = await response.json();
         toast.success("Report created successfully!");
         router.push(
-          `/dashboard/projects/${projectId}/reports/${report.id}`
+          `/dashboard/projects/${projectId}/reports/${resp.id}`
         );
       } else {
-        throw new Error("Failed to generate report");
+        throw new Error(resp.error || "Failed to generate report");
       }
-    } catch (error) {
-      toast.error("Failed to generate report. Please try again.");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to generate report. Please try again.");
     } finally {
       setIsLoading(false);
       onClose();

@@ -4,7 +4,7 @@ import { reportsTable } from "@/db/schema/report.schema";
 import { authProtectServerSide } from "@/utils/auth";
 import { projectsTable } from "@/db/schema";
 import { and, eq, sql, gt, isNull } from "drizzle-orm";
-import { calculateCreditCost, deductCreditForReport, getUserCredit } from "@/actions/analysis-credit";
+import { calculateCreditCost, deductCreditForReport, getUserCredit, giveCreditToRegisteredUser } from "@/actions/analysis-credit";
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     const userCredit = await getUserCredit(currentUser.id);
     if (!userCredit) {
       return NextResponse.json(
-        { error: "Your credit not found, please top up your credit to generate a report" },
+        { error: "Your credit not found, please contact support" },
         { status: 404 }
       );
     }
