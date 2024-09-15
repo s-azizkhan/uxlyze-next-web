@@ -4,3 +4,6 @@ export * from "./schema/project.schema";
 export * from "./schema/feedback.schema";
 export * from "./schema/report.schema";
 export * from "./schema/report-result.schema";
+export * from "./schema/analysis-credit.schema";
+export * from "./schema/analysis-credit-usage.schema";
+
