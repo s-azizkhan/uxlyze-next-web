@@ -6,4 +6,4 @@ export * from "./schema/report.schema";
 export * from "./schema/report-result.schema";
 export * from "./schema/analysis-credit.schema";
 export * from "./schema/analysis-credit-usage.schema";
-
+export * from "./schema/sys-config.schema";
