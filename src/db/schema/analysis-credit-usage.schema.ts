@@ -7,12 +7,16 @@ import { analysisCreditsTable } from "./analysis-credit.schema";
 
 export const analysisCreditUsageTable = pgTable("analysis_credit_usages", {
   id: uuid("id").primaryKey().defaultRandom(),
-  analysisCreditId: uuid("analysis_credit_id").references(
-    () => analysisCreditsTable.id
-  ),
+  analysisCreditId: uuid("analysis_credit_id")
+    .references(() => analysisCreditsTable.id)
+    .notNull(),
   amount: integer("amount").notNull(),
-  usedBy: uuid("used_by").references(() => usersTable.id),
-  reportId: uuid("report_id").references(() => reportsTable.id),
+  usedBy: uuid("used_by")
+    .references(() => usersTable.id)
+    .notNull(),
+  reportId: uuid("report_id")
+    .references(() => reportsTable.id)
+    .notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
