@@ -17,6 +17,15 @@ export async function POST(request: NextRequest) {
     if (!currentUser) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    if (!currentUser.reportGenerationAccess) {
+      return NextResponse.json(
+        {
+          error:
+            "You do not have access to generate reports, currently available for selected users, please contact support to enable it.",
+        },
+        { status: 403 }
+      );
+    }
 
     const {
       title,

@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "report_generation_access" boolean DEFAULT false;

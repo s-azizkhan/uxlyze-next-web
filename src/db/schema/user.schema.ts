@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { projectsTable } from "./project.schema";
 import { reportsTable } from "./report.schema";
 export const usersTable = pgTable("users", {
@@ -13,6 +13,7 @@ export const usersTable = pgTable("users", {
     .$onUpdate(() => new Date()),
   mailingUid: text("mailing_uid"),
   mailingProvider: text("mailing_provider"),
+  reportGenerationAccess: boolean("report_generation_access").default(false),
 });
 
 export type InsertUser = typeof usersTable.$inferInsert;
