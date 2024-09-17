@@ -63,7 +63,7 @@ export default function CreateReportDialog({
       if (response.ok) {
         toast.success("Report created successfully!");
         router.push(
-          `/dashboard/projects/${projectId}/reports/${resp.id}`
+          `/dashboard/reports/${resp.id}`
         );
       } else {
         throw new Error(resp.error || "Failed to generate report");

@@ -42,3 +42,23 @@ export async function getProjectById(id: string) {
     return null;
   }
 }
+
+export async function createDefaultProjectForUser(userId: string) {
+  try {
+    const project = await db
+      .insert(projectsTable)
+      .values({
+        type: "website",
+        userId,
+        name: "Default Project",
+      })
+      .returning();
+
+    console.log("Default project created for user:", userId, project);
+
+    return project;
+  } catch (error) {
+    console.error("Error creating default project for user:", error);
+    throw error;
+  }
+}

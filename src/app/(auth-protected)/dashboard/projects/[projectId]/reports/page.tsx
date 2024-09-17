@@ -35,7 +35,7 @@ export default function ViewAllReportsPage({
                 Created on: {report.createdAt}
               </p>
               <Link
-                href={`/dashboard/projects/${params.id}/reports/${report.id}`}
+                href={`/dashboard/reports/${report.id}`}
               >
                 <Button variant="outline" className="w-full">
                   <EyeIcon className="mr-2 h-4 w-4" />

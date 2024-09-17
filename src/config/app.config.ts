@@ -6,3 +6,4 @@ export const REPORT_CREDIT_COST = {
   INCLUDE_PSI: 10,
   INCLUDE_AI_ANALYSIS: 20,
 };
+export const ANALYZER_API_BASE = process.env.ANALYZER_API_BASE;

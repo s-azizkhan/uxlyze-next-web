@@ -4,7 +4,12 @@ import { reportsTable } from "@/db/schema/report.schema";
 import { authProtectServerSide } from "@/utils/auth";
 import { projectsTable } from "@/db/schema";
 import { and, eq, sql, gt, isNull } from "drizzle-orm";
-import { calculateCreditCost, deductCreditForReport, getUserCredit, giveCreditToRegisteredUser } from "@/actions/analysis-credit";
+import {
+  calculateCreditCost,
+  deductCreditForReport,
+  getUserCredit,
+} from "@/actions/analysis-credit";
+import { addToAnalyzerServer } from "@/actions/report";
 
 export async function POST(request: NextRequest) {
   try {
@@ -90,7 +95,7 @@ export async function POST(request: NextRequest) {
       skipUrlFetch,
     };
 
-    const report = await db
+    const [report] = await db
       .insert(reportsTable)
       .values({
         title,
@@ -102,16 +107,18 @@ export async function POST(request: NextRequest) {
       .returning();
 
     // update the count on the project
-    await db
-      .update(projectsTable)
-      .set({
-        reportCount: sql`${project.reportCount} + 1`,
-      })
-      .where(eq(projectsTable.id, projectId));
-      // deduct credit
-      await deductCreditForReport(currentUser.id, report[0].id, reportCost);
+    // deduct credit
+    // call the analyzer API to generate report result without waiting
+    await Promise.all([
+      db
+        .update(projectsTable)
+        .set({ reportCount: sql`${project.reportCount} + 1` })
+        .where(eq(projectsTable.id, projectId)),
+      deductCreditForReport(currentUser.id, report.id, reportCost),
+      addToAnalyzerServer(report.id),
+    ]);
 
-    return NextResponse.json(report[0], { status: 201 });
+    return NextResponse.json(report, { status: 201 });
   } catch (error) {
     console.error("Error creating report:", error);
     return NextResponse.json(

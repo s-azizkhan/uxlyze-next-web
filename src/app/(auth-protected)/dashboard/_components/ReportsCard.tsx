@@ -66,7 +66,7 @@ export default function ReportsCard() {
                 </CardContent>
                 <CardFooter>
                   <Link
-                    href={`/dashboard/projects/${report.projectId}/reports/${report.id}`}
+                    href={`/dashboard/reports/${report.id}`}
                     className="w-full"
                   >
                     <Button variant="outline" className="w-full">

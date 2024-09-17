@@ -121,7 +121,7 @@ export default function CreateReport({ projectId }: { projectId: string }) {
           title: `Report Generation Started`,
           description: "You will be redirected to the report page.",
         });
-        router.push(`/dashboard/projects/${projectId}/reports/${resp.data.id}`);
+        router.push(`/dashboard/reports/${resp.data.id}`);
       } else {
         throw new Error(resp.error || "Failed to Generate Report");
       }
