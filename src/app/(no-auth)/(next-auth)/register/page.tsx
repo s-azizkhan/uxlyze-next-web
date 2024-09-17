@@ -1,4 +1,3 @@
-import WaitListForm from "@/components/shared/wait-list-form";
 import {
   Card,
   CardContent,
@@ -8,26 +7,35 @@ import {
 } from "@/components/ui/card";
 
 import { APP_NAME } from "@/config/app.config";
+import RegisterForm from "./Form";
+import { metaTitlePostFix } from "@/app/layout";
 
-export default function WaitlistPage() {
+// metadata
+export const metadata = {
+  title: "Register for " + metaTitlePostFix,
+  description:
+    "Be among the first to experience the advanced UI/UX analytics for your projects!",
+};
+export default function RegisterPage() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
+    <section className="flex items-center justify-center lg:py-20 py-10">
       <div className="container px-4">
-        <Card className="mx-auto max-w-md w-full shadow-lg">
+        <Card className="mx-auto max-w-md w-full">
           <CardHeader className="text-center">
             <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary  to-purple-600 text-transparent bg-clip-text">
-              Join the {APP_NAME} Waitlist
+              Register for {APP_NAME}
             </CardTitle>
             <CardDescription className="text-lg mt-2">
-              Be among the first to experience our revolutionary platform!
+              Be among the first to experience the advanced UI/UX analytics for
+              your projects!
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <WaitListForm />
+            <RegisterForm />
           </CardContent>
         </Card>
         <p className="text-center mt-8 text-gray-600">
-          Limited spots available. Sign up now to secure your place!
+          Beta access is limited. Register now to secure your spot!
         </p>
       </div>
     </section>

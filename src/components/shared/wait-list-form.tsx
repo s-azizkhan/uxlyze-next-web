@@ -63,7 +63,7 @@ export default function WaitListForm() {
                 id="email"
                 className="w-full p-2 border-none focus:outline-none"
                 type="email"
-                placeholder="Your business email"
+                placeholder="Your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

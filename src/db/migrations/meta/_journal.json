@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1726294789450,
+      "tag": "20240914061949_freezing_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1726296314317,
+      "tag": "20240914064514_silent_warbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1726319162663,
+      "tag": "20240914130602_safe_wallow",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1726325323158,
+      "tag": "20240914144843_striped_ma_gnuci",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1726327055467,
+      "tag": "20240914151735_tricky_mac_gargan",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1726403661422,
+      "tag": "20240915123421_red_black_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1726404229481,
+      "tag": "20240915124349_loving_spencer_smythe",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1726405485516,
+      "tag": "20240915130445_sharp_aaron_stack",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1726572093969,
+      "tag": "20240917112133_wet_maestro",
+      "breakpoints": true
+    }
+  ]
+}

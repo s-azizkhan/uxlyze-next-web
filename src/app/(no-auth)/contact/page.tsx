@@ -24,7 +24,7 @@ import { APP_NAME } from "@/config/app.config";
 
 export default function ContactPage() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },

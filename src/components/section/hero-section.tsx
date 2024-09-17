@@ -177,7 +177,7 @@ export default function HeroSection() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="mt-3 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
-            <Link href="#how-it-works-section">
+            <Link href="#how-it-works">
               <Button
                 variant="outline"
                 size="lg"

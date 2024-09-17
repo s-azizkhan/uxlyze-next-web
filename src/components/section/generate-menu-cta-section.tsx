@@ -60,7 +60,7 @@ const itemVariants = {
 
 export default function UiUxEvaluationCtaSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <section className="pb-24" id="ui-ux-evaluation-cta-section" ref={ref}>

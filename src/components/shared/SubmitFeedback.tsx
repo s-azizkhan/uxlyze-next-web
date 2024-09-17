@@ -59,8 +59,8 @@ export default function SubmitFeedback() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <div className="fixed right-5 top-1/2 transform -translate-y-1/2 z-50">
+      <div className="fixed right-5 top-1/2 transform -translate-y-1/2 z-50">
+        <DialogTrigger asChild>
           <Button
             variant="default"
             className="rotate-[-90deg] origin-right bg-primary text-primary-foreground hover:bg-primary/90 rounded-t-lg rounded-b-none px-6 py-2"
@@ -68,8 +68,8 @@ export default function SubmitFeedback() {
             <MessageSquarePlusIcon className="mr-2 h-4 w-4 rotate-90" />
             Submit Feedback
           </Button>
-        </div>
-      </DialogTrigger>
+        </DialogTrigger>
+      </div>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Submit Feedback</DialogTitle>

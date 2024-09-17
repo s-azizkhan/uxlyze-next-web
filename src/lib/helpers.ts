@@ -16,3 +16,7 @@ export const getBaseUrl = () => {
 
   return "http://localhost:3000";
 };
+
+export const isProduction = () => {
+  return process.env.NODE_ENV === "production";
+};

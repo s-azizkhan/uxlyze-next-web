@@ -61,15 +61,15 @@ const featureSectionContent = {
 
 const Features = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, staggerChildren: 0.1 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 relative z-10 py-16"
+      transition={{ duration: 0.7, staggerChildren: 0.2 }}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 relative z-10 py-20"
     >
       {featureSectionContent.features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
@@ -92,47 +92,43 @@ const Feature = ({
   index: number;
 }) => {
   return (
-    <Link href={href || "#"}>
+    <Link href={href || "/features"}>
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
+        transition={{ duration: 0.7, delay: index * 0.2 }}
         whileHover={{
           scale: 1.05,
           rotate: [0, 1, -1, 0],
           transition: { duration: 0.3 },
         }}
         className={cn(
-          "flex flex-col p-6 rounded-xl bg-white/10 dark:bg-neutral-800/10 backdrop-blur-lg shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer",
-          "transform hover:-translate-y-2 hover:bg-white/20 dark:hover:bg-neutral-800/20 border border-black/15 dark:border-white/15"
+          "flex flex-col p-8 rounded-2xl bg-white/10 dark:bg-neutral-800/10 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all duration-500 group cursor-pointer",
+          "transform hover:-translate-y-2 hover:bg-white/20 dark:hover:bg-neutral-800/20 border border-black/10 dark:border-white/10"
         )}
       >
-        <motion.div
-          className="mb-4 text-primary dark:text-primary-light transition-colors duration-300 group-hover:text-secondary"
-          whileHover={{ rotate: 360, scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        >
+        <div className="mb-6 text-primary dark:text-primary-light transition-colors duration-300 group-hover:text-secondary">
           {icon}
-        </motion.div>
+        </div>
         <motion.h3
-          className="text-2xl font-bold mb-2 text-black dark:text-white group-hover:text-primary transition-colors duration-300"
+          className="text-2xl font-bold mb-3 text-black dark:text-white group-hover:text-primary transition-colors duration-300"
           whileHover={{ scale: 1.05 }}
         >
           {title}
         </motion.h3>
         <motion.p
-          className="text-lg text-gray-900 dark:text-gray-50 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300"
+          className="text-lg text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors duration-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.3 }}
         >
           {description}
         </motion.p>
         <motion.div
-          className="mt-4 flex items-center text-primary dark:text-primary-light text-opacity-80 group-hover:text-opacity-100 transition-colors duration-300"
+          className="mt-6 flex items-center text-primary dark:text-primary-light text-opacity-80 group-hover:text-opacity-100 transition-colors duration-300"
           whileHover={{ x: 5 }}
         >
-          <span className="text-sm font-semibold">Explore</span>
+          <span className="text-sm font-semibold">Learn More</span>
           <motion.div
             animate={{ x: [0, 5, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
@@ -147,7 +143,7 @@ const Feature = ({
 
 export default function FeatureSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>

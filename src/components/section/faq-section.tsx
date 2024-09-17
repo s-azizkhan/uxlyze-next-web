@@ -51,7 +51,7 @@ export default function FaqSection({
   faqSectionContent?: typeof defaultFaqSectionContent;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>

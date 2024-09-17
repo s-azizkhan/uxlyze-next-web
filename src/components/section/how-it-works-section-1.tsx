@@ -65,7 +65,7 @@ const howItWorksContent = [
 
 const Steps = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -174,7 +174,7 @@ const Step = ({
 
 export default function HowItWorksSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>
@@ -184,7 +184,7 @@ export default function HowItWorksSection() {
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
         className="py-20"
-        id="how-it-works-section"
+        id="how-it-works"
       >
         <div className="container mx-auto px-4">
           <motion.div

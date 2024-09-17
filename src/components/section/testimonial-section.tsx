@@ -1,104 +1,41 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { StarIcon } from "hugeicons-react";
-import {
-  MinimalCard,
-  MinimalCardDescription,
-  MinimalCardImage,
-  MinimalCardTitle,
-} from "@/components/ui/minimal-card";
 import MaxWidthWrapper from "../shared/max-width-wrapper";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { APP_NAME } from "@/config/app.config";
 import TitleTopBadge from "../shared/title-top-badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { MessageAdd01Icon } from "hugeicons-react";
 
-const testimonialsContent = [
-  {
-    name: "Emily Chen",
-    role: "UX Designer",
-    company: "TechInnovate",
-    image: "https://www.shadcnblocks.com/images/block/avatar-1.webp",
-    content: `"${APP_NAME} has revolutionized our design process. The automated UI/UX evaluation saves us hours of manual work, and the Figma integration is seamless!"`,
-    rating: 5,
-  },
-  {
-    name: "Alex Rodriguez",
-    role: "Product Manager",
-    company: "DesignWave",
-    image: "https://www.shadcnblocks.com/images/block/avatar-2.webp",
-    content: `"The real-time comparison between our Figma designs and live websites has dramatically improved our iteration speed. ${APP_NAME} is a game-changer for our team."`,
-    rating: 5,
-  },
-  {
-    name: "Sarah Johnson",
-    role: "Frontend Developer",
-    company: "WebCraft Solutions",
-    image: "https://www.shadcnblocks.com/images/block/avatar-3.webp",
-    content: `"As a developer, I love how ${APP_NAME} bridges the gap between design and implementation. The customizable reports help us focus on what matters most for each project."`,
-    rating: 4,
-  },
-];
-
-function TestimonialCards() {
+function FeedbackCTA() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full max-w-6xl mx-auto mt-16"
+      className="w-full max-w-3xl mx-auto mt-16 text-center"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {testimonialsContent.map((testimonial, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <MinimalCard className="bg-white shadow-lg rounded-lg p-6">
-              <div className="flex items-center mb-4">
-                <MinimalCardImage
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <MinimalCardTitle className="font-semibold">
-                    {testimonial.name}
-                  </MinimalCardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {testimonial.role} at {testimonial.company}
-                  </p>
-                </div>
-              </div>
-              <MinimalCardDescription className="text-gray-700 dark:text-gray-300 mb-4">
-                {testimonial.content}
-              </MinimalCardDescription>
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <StarIcon
-                    key={i}
-                    className={`w-5 h-5 ${
-                      i < testimonial.rating
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                    fill="currentColor"
-                  />
-                ))}
-              </div>
-            </MinimalCard>
-          </motion.div>
-        ))}
-      </div>
+      <h3 className="text-2xl font-semibold mb-4">
+        Be the First to Share Your Experience
+      </h3>
+      <p className="text-lg mb-6">
+        Your feedback is invaluable in shaping {APP_NAME}. Help us improve by
+        sharing your thoughts.
+      </p>
+      <Link href="/submit-feedback" passHref>
+        <Button className="rounded-xl" size="lg">
+          Submit Your Feedback
+          <MessageAdd01Icon className="ml-2 size-4 animate-pulse" />
+        </Button>
+      </Link>
     </motion.div>
   );
 }
 
 export default function TestimonialSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <MaxWidthWrapper>
@@ -116,41 +53,23 @@ export default function TestimonialSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="max-w-6xl mx-auto text-center"
           >
-            <TitleTopBadge title={`Why ${APP_NAME}?`} />
+            <TitleTopBadge title={`Help Us Improve ${APP_NAME}`} />
 
             <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              Revolutionizing UI/UX Evaluation
+              We Value Your Feedback
             </h2>
-            <div className="flex flex-col justify-center items-center">
-              <span className="relative inline-flex justify-center -space-x-4">
-                {[1, 6, 3].map((num) => (
-                  <Avatar
-                    key={num}
-                    className="w-10 h-10 border-2 border-white shadow-lg sm:w-12 sm:h-12 md:w-16 md:h-16"
-                  >
-                    <AvatarImage
-                      src={`https://www.shadcnblocks.com/images/block/avatar-${num}.webp`}
-                      alt={`Testimonial avatar ${num}`}
-                    />
-                  </Avatar>
-                ))}
-              </span>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
-              >
-                Discover how our AI-powered platform is transforming the design
-                process with automated UI/UX evaluation, seamless Figma
-                integration, and real-time website comparisons.
-              </motion.p>
-            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+            >
+              Your feedback is crucial in shaping the future of {APP_NAME}.
+              Share your experience and help us enhance our AI-powered UI/UX
+              evaluation platform.
+            </motion.p>
           </motion.div>
-          <TestimonialCards />
+          <FeedbackCTA />
         </div>
       </motion.section>
     </MaxWidthWrapper>

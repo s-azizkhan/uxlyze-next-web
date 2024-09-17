@@ -38,7 +38,7 @@ const featureContent = [
 
 export default function FeatureSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, amount: 0.2 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <MaxWidthWrapper>
