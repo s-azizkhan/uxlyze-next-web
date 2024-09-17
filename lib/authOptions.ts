@@ -26,13 +26,13 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error("Credentials are required");
         }
         const user = await db.query.usersTable.findFirst({
           where: eq(usersTable.email, credentials?.email as string),
         });
         if (!user) {
-          return null;
+          throw new Error("User not found");
         }
 
         const bcrypt = require("bcrypt");
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
           };
         }
 
-        return null;
+        throw new Error("Invalid credentials");
       },
     }),
   ],
