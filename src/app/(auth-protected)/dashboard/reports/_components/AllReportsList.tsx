@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import {
   EyeIcon,
-  ArrowRightIcon,
   AlertTriangleIcon,
   RefreshCwIcon,
 } from "lucide-react";
@@ -18,13 +17,13 @@ import {
 import { ReportWithProject, useReports } from "@/hooks/useReports";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
-import CreateReportDialog from "./CreateReportDialog";
 import { motion } from "framer-motion";
 import { IconLoader } from "@tabler/icons-react";
+import CreateReportDialog from "../../_components/CreateReportDialog";
 import { MagicWand02Icon } from "hugeicons-react";
 
-export default function ReportsCard() {
-  const { data: recentReports, isLoading, error } = useReports("", 3);
+export default function AllReportsList() {
+  const { data: recentReports, isLoading, error } = useReports("", 40);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   if (isLoading) return <ReportsCardSkeleton />;
@@ -39,7 +38,7 @@ export default function ReportsCard() {
     >
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 md:mb-6">
         <h2 className="text-2xl font-bold md:text-3xl mb-4 md:mb-0">
-          Recent Reports
+          My Reports
         </h2>
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
           <Button
@@ -50,12 +49,6 @@ export default function ReportsCard() {
             <MagicWand02Icon className="mr-2 h-5 w-5" />
             Generate Report
           </Button>
-          <Link href="/dashboard/reports" className="w-full sm:w-auto">
-            <Button variant="outline" className="w-full rounded-xl" size="lg">
-              View All
-              <ArrowRightIcon className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
         </div>
       </div>
 
@@ -146,7 +139,7 @@ function ReportsCardSkeleton() {
     <>
       <div className="mt-12">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold md:text-3xl">Recent Reports</h2>
+          <h2 className="text-2xl font-semibold md:text-3xl">My Reports</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(3)].map((_, index) => (
