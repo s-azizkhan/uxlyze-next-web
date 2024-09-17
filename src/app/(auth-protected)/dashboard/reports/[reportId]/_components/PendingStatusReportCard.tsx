@@ -27,10 +27,9 @@ export default function PendingStatusReportCard({
         </h2>
       </div>
       <p className="text-gray-600 mb-6 leading-relaxed">
-        Hold onto your pixels! Our AI wizards are conjuring up insights faster
-        than you can say "SEO". In just 5-10 seconds (perfect for a quick dance
-        break), we'll reveal the secrets hiding in your website. Ready to see if
-        your site is more Hogwarts or Mordor?
+        {
+          "Hold onto your pixels! Our AI wizards are conjuring up insights faster than you can say 'SEO'. In just 5-10 seconds (perfect for a quick dance break), we'll reveal the secrets hiding in your website. Ready to see if your site is more Hogwarts or Mordor?"
+        }
       </p>
       <div className="text-center">
         <p className="text-sm text-gray-500 mb-2">Current Spell:</p>

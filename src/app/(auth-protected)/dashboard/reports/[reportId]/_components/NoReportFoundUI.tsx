@@ -9,8 +9,9 @@ export default function NoReportFoundUI() {
           Report Not Found
         </h2>
         <p className="text-xl text-gray-600 mb-8">
-          We couldn't find the report you're looking for. It may have been
-          deleted or doesn't exist.
+          {
+            "We couldn't find the report you're looking for. It may have been deleted or doesn't exist."
+          }
         </p>
         <Button asChild>
           <Link href="/dashboard">Back to Dashboard</Link>

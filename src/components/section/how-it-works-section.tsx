@@ -8,6 +8,7 @@ import Image from "next/image";
 import { APP_NAME } from "@/config/app.config";
 import TitleTopBadge from "../shared/title-top-badge";
 import { ConnectIcon, Rocket01Icon } from "hugeicons-react";
+import Link from "next/link";
 
 const steps = [
   {
@@ -32,7 +33,7 @@ export default function HowItWorksSection() {
 
   return (
     <MaxWidthWrapper>
-      <section className="lg:py-20 py-10 overflow-hidden">
+      <section className="lg:py-20 py-10 overflow-hidden" id="how-it-works">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,10 +95,12 @@ export default function HowItWorksSection() {
                     Join thousands of designers using {APP_NAME}.
                   </p>
                 </div>
-                <Button size="lg" className="group rounded-xl">
-                  Join now
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link href="/register">
+                  <Button size="lg" className="group rounded-xl">
+                    Join now
+                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </motion.div>

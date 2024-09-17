@@ -30,9 +30,10 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 
+// TODO: show this card
 export function UpgradeCard() {
   return (
-    <Card x-chunk="dashboard-02-chunk-0" className="bg-white">
+    <Card x-chunk="dashboard-02-chunk-0" className="bg-white hidden">
       <CardHeader className="p-3 text-center">
         <CardTitle className="text-lg font-semibold text-gray-900">
           Upgrade to Pro

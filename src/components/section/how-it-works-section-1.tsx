@@ -184,7 +184,7 @@ export default function HowItWorksSection() {
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
         className="py-20"
-        id="how-it-works-section"
+        id="how-it-works"
       >
         <div className="container mx-auto px-4">
           <motion.div
