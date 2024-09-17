@@ -25,10 +25,12 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        const user = await db
-          .select()
-          .from(usersTable)
-          .where(eq(usersTable.email, credentials?.email as string));
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+        const user = await db.query.usersTable.findFirst({
+          where: eq(usersTable.email, credentials?.email as string),
+        });
         if (!user) {
           return null;
         }
@@ -37,14 +39,14 @@ export const authOptions: NextAuthOptions = {
 
         const passwordCorrect = await bcrypt.compare(
           credentials?.password,
-          user[0].password
+          user.password
         );
 
         if (passwordCorrect) {
           return {
-            id: user[0].id,
-            email: user[0].email,
-            name: user[0].name,
+            id: user.id,
+            email: user.email,
+            name: user.name,
           };
         }
 
