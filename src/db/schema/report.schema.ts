@@ -27,7 +27,7 @@ export type SelectReport = typeof reportsTable.$inferSelect;
 
 // relations
 export const reportRelation = relations(reportsTable, ({ one }) => ({
-  result: one(reportResultsTable, {
+  resultData: one(reportResultsTable, {
     fields: [reportsTable.id],
     references: [reportResultsTable.reportId],
     relationName: "reportResult",

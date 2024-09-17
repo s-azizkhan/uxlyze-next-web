@@ -89,3 +89,15 @@ export interface IAnalysisResult {
   SEO: ISEO;
   AiAnalysis: IAiAnalysis;
 }
+
+export interface IReportConfig {
+  includeColorUsage?: boolean;
+  includeFontUsage?: boolean;
+  includeNavigationAnalysis?: boolean;
+  includeReadability?: boolean;
+  includeSEO?: boolean;
+  skipUrlFetch: boolean;
+  includePreview: boolean;
+  includePSI: boolean;
+  includeAIAnalysis: boolean;
+}

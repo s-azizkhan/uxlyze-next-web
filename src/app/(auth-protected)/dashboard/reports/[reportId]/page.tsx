@@ -5,6 +5,10 @@ export const metadata = {
   title: "View Report | by " + metaTitlePostFix,
 };
 
-export default function ViewSingleReportPage() {
-  return <ViewReportResult />;
+export default function ViewSingleReportPage({
+  params,
+}: {
+  params: { reportId: string };
+}) {
+  return <ViewReportResult reportId={params.reportId} />;
 }

@@ -1,4 +1,5 @@
 import { ANALYZER_API_BASE } from "@/config/app.config";
+import { db } from "@/db";
 
 export const addToAnalyzerServer = async (reportId: string) => {
   if (!ANALYZER_API_BASE) {
@@ -18,4 +19,16 @@ export const addToAnalyzerServer = async (reportId: string) => {
   } catch (error) {
     console.error("Error adding to analyzer server:", error);
   }
+};
+
+export const getReportWithResult = async (reportId: string, userId: string) => {
+  const data = await db.query.reportsTable.findFirst({
+    with: {
+      resultData: true,
+    },
+    where: (reportsTable, { eq, and }) =>
+      and(eq(reportsTable.id, reportId), eq(reportsTable.userId, userId)),
+  });
+
+  return data;
 };

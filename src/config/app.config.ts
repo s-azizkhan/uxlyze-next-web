@@ -1,4 +1,5 @@
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME;
+export const APP_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const DEFAULT_FREE_CREDIT = 100;
 export const REPORT_CREDIT_COST = {
   DEFAULT: 10,
