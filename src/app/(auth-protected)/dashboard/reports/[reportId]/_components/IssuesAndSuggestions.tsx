@@ -64,13 +64,13 @@ export default function IssuesAndSuggestions({
           value={score * 10}
           text={`${score.toFixed(1)}`}
           styles={buildStyles({
-            textSize: "28px",
+            textSize: "24px",
             pathColor: color,
             textColor: color,
             trailColor: "rgba(0,0,0,0.1)",
           })}
         />
-        <p className="text-xs text-center mt-1 font-semibold" style={{ color }}>
+        <p className="text-xs text-center mt-2 font-semibold" style={{ color }}>
           {text}
         </p>
       </div>
@@ -78,29 +78,35 @@ export default function IssuesAndSuggestions({
   };
 
   const renderCategoryContent = (category: ICategoryAnalysis) => (
-    <div className="mt-4 space-y-4">
+    <div className="mt-4 space-y-6">
       <div>
-        <h3 className="font-semibold mb-2 flex items-center">
-          <AlertCircle className="mr-2" size={18} /> Top Issues:
+        <h3 className="font-semibold mb-3 flex items-center text-lg">
+          <AlertCircle className="mr-2" size={20} /> Top Issues
         </h3>
-        <ul className="list-none space-y-2">
-          {category.issues.slice(0, 3).map((issue, index) => (
-            <li key={index} className="flex items-start">
-              <span className="text-red-500 mr-2">•</span>
-              <span>{issue.description}</span>
+        <ul className="list-none space-y-3">
+          {category?.issues?.slice(0, 3).map((issue, index) => (
+            <li
+              key={index}
+              className="flex items-start bg-red-50 p-3 rounded-md"
+            >
+              <span className="text-red-500 mr-3 mt-1">•</span>
+              <span className="text-sm">{issue.description}</span>
             </li>
           ))}
         </ul>
       </div>
       <div>
-        <h3 className="font-semibold mb-2 flex items-center">
-          <Lightbulb className="mr-2" size={18} /> Key Suggestions:
+        <h3 className="font-semibold mb-3 flex items-center text-lg">
+          <Lightbulb className="mr-2" size={20} /> Key Suggestions
         </h3>
-        <ul className="list-none space-y-2">
-          {category.suggestions.slice(0, 3).map((suggestion, index) => (
-            <li key={index} className="flex items-start">
-              <span className="text-green-500 mr-2">•</span>
-              <span>{suggestion.description}</span>
+        <ul className="list-none space-y-3">
+          {category?.suggestions?.slice(0, 3).map((suggestion, index) => (
+            <li
+              key={index}
+              className="flex items-start bg-green-50 p-3 rounded-md"
+            >
+              <span className="text-green-500 mr-3 mt-1">•</span>
+              <span className="text-sm">{suggestion.description}</span>
             </li>
           ))}
         </ul>
@@ -109,24 +115,33 @@ export default function IssuesAndSuggestions({
   );
 
   return (
-    <section className="mb-8">
-      <h2 className="text-3xl font-bold mb-6">Analysis Overview</h2>
+    <section className="mb-12">
+      <h2 className="text-3xl font-bold mb-1">Analysis Overview</h2>
+      <p className="text-lg mb-8 text-muted-foreground">
+        Click on each category to view detailed analysis and suggestions.
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {categories.map(({ key, icon }) => {
           const { bgColor } = getScoreInfo(analysis[key].score);
           return (
             <Card
               key={key}
-              className={`transition-all duration-300 ease-in-out ${bgColor} hover:shadow-lg cursor-pointer`}
+              className={`
+                transition-all duration-300 ease-in-out 
+                ${bgColor} hover:shadow-xl cursor-pointer
+                backdrop-filter backdrop-blur-lg bg-opacity-30
+                border border-gray-200 dark:border-gray-700
+                rounded-xl overflow-hidden
+              `}
               onClick={() => {
                 setSelectedCategory(key);
                 setModalOpen(true);
               }}
             >
-              <CardHeader>
+              <CardHeader className="p-6">
                 <CardTitle className="flex justify-between items-center">
-                  <span className="capitalize flex items-center">
-                    {icon} <span className="ml-2">{key.replace("_", " ")}</span>
+                  <span className="capitalize flex items-center text-lg font-semibold">
+                    {icon} <span className="ml-3">{key.replace("_", " ")}</span>
                   </span>
                   {renderScoreCircle(analysis[key].score, key)}
                 </CardTitle>
@@ -137,10 +152,10 @@ export default function IssuesAndSuggestions({
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[550px]">
           <DialogHeader>
-            <DialogTitle className="capitalize">
-              {selectedCategory?.replace("_", " ")}
+            <DialogTitle className="capitalize text-2xl font-bold mb-4">
+              {selectedCategory && selectedCategory.replace("_", " ")} Analysis
             </DialogTitle>
           </DialogHeader>
           {selectedCategory &&

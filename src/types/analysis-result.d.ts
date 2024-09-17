@@ -87,7 +87,7 @@ export interface IAnalysisResult {
   ColorUsage: IColorUsage;
   FontUsage: IFontUsageDetails;
   SEO: ISEO;
-  AiAnalysis: IAiAnalysis;
+  geminiAnalysis: IAiAnalysis;
 }
 
 export interface IReportConfig {

@@ -18,7 +18,7 @@ export default function ScreenshotGallery({
             <CardContent>
               {url ? (
                 <Image
-                  src={url}
+                  src={`data:image/png;base64,${url}`}
                   alt={`${key} screenshot`}
                   width={300}
                   height={200}
