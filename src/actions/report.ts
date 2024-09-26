@@ -8,14 +8,11 @@ export const addToAnalyzerServer = async (reportId: string) => {
   }
   try {
     const options = {
-      method: "POST",
-      url: `${ANALYZER_API_BASE}/submit-job`,
       headers: { "Content-Type": "application/json" },
-      data: { payload: reportId },
     };
 
     axios
-      .request(options)
+      .post(`${ANALYZER_API_BASE}/submit-job`, { payload: reportId }, options)
       .then(function (response) {
         console.log("Analyzer server response for reportId: ", response.data);
       })
