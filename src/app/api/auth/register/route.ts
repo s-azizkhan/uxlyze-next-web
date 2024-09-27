@@ -59,10 +59,10 @@ export async function POST(request: Request) {
 
     const newUser = await db.insert(usersTable).values(newUserData).returning();
     // give FREE credit to the user
-    giveCreditToRegisteredUser(newUser[0].id);
+    await giveCreditToRegisteredUser(newUser[0].id);
 
     // create default project for the user
-    createDefaultProjectForUser(newUser[0].id);
+    await createDefaultProjectForUser(newUser[0].id);
 
     return NextResponse.json(
       { success: "Joined the revolution, welcome to the UXlyze!" },

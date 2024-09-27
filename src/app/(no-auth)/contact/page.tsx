@@ -81,17 +81,17 @@ export default function ContactPage() {
                   {
                     icon: Mail01Icon,
                     title: "Email",
-                    content: "info@easytap.ai",
+                    content: "uxlyze@gmail.com",
                   },
                   {
                     icon: PhoneIcon,
                     title: "Phone",
-                    content: "+1 (800) 123-4567",
+                    content: "8368010631",
                   },
                   {
                     icon: MapPinpoint01Icon,
                     title: "Address",
-                    content: "123 AI Boulevard, Tech City, TC 12345",
+                    content: "Cuttack, Odisha, PIN: 754221",
                   },
                   {
                     icon: Clock01Icon,
