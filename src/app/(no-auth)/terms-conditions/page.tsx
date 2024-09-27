@@ -49,65 +49,65 @@ export default function TermsPage() {
                 </li>
 
                 <li>
-                  The contents of the Website and the Services are proprietary
+                  {`The contents of the Website and the Services are proprietary
                   to Us and you will not have any authority to claim any
                   intellectual property rights, title, or interest in its
-                  contents.
+                  contents.`}
                 </li>
                 <li>
-                  You acknowledge that unauthorized use of the Website or the
+                  {` You acknowledge that unauthorized use of the Website or the
                   Services may lead to action against you as per these Terms or
-                  applicable laws.
+                  applicable laws.`}
                 </li>
                 <li>
-                  You agree to pay us the charges associated with availing the
-                  Services.
+                  {`You agree to pay us the charges associated with availing the
+                  Services.`}
                 </li>
                 <li>
-                  You agree not to use the website and/or Services for any
+                  {` You agree not to use the website and/or Services for any
                   purpose that is unlawful, illegal, or forbidden by these
-                  Terms, or Indian or local laws that might apply to you.
+                  Terms, or Indian or local laws that might apply to you.`}
                 </li>
                 <li>
-                  You agree and acknowledge that the website and the Services
+                  {` You agree and acknowledge that the website and the Services
                   may contain links to other third-party websites. On accessing
                   these links, you will be governed by the terms of use, privacy
-                  policy, and such other policies of such third-party websites.
+                  policy, and such other policies of such third-party websites.`}
                 </li>
                 <li>
-                  You understand that upon initiating a transaction for availing
+                  {` You understand that upon initiating a transaction for availing
                   the Services you are entering into a legally binding and
-                  enforceable contract with us for the Services.
+                  enforceable contract with us for the Services.`}
                 </li>
                 <li>
-                  You shall be entitled to claim a refund of the payment made by
+                  {`You shall be entitled to claim a refund of the payment made by
                   you in case we are not able to provide the Service. The
                   timelines for such return and refund will be according to the
                   specific Service you have availed or within the time period
                   provided in our policies (as applicable). In case you do not
                   raise a refund claim within the stipulated time, then this
-                  would make you ineligible for a refund.
+                  would make you ineligible for a refund.`}
                 </li>
                 <li>
-                  Notwithstanding anything contained in these Terms, the parties
+                  {`Notwithstanding anything contained in these Terms, the parties
                   shall not be liable for any failure to perform an obligation
                   under these Terms if performance is prevented or delayed by a
-                  force majeure event.
+                  force majeure event.`}
                 </li>
                 <li>
-                  These Terms and any dispute or claim relating to it, or its
+                  {`These Terms and any dispute or claim relating to it, or its
                   enforceability, shall be governed by and construed in
-                  accordance with the laws of India.
+                  accordance with the laws of India.`}
                 </li>
                 <li>
-                  All disputes arising out of or in connection with these Terms
+                  {`All disputes arising out of or in connection with these Terms
                   shall be subject to the exclusive jurisdiction of the courts
-                  in Cuttack, Odisha.
+                  in Cuttack, Odisha.`}
                 </li>
                 <li>
-                  All concerns or communications relating to these Terms must be
+                  {`All concerns or communications relating to these Terms must be
                   communicated to us using the contact information provided on
-                  this website.
+                  this website.`}
                 </li>
               </ul>
             </div>
