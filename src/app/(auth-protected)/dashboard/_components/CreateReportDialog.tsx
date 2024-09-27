@@ -62,14 +62,14 @@ export default function CreateReportDialog({
       const resp = await response.json();
       if (response.ok) {
         toast.success("Report created successfully!");
-        router.push(
-          `/dashboard/reports/${resp.id}`
-        );
+        router.push(`/dashboard/reports/${resp.id}`);
       } else {
         throw new Error(resp.error || "Failed to generate report");
       }
     } catch (error: any) {
-      toast.error(error.message || "Failed to generate report. Please try again.");
+      toast.error(
+        error.message || "Failed to generate report. Please try again."
+      );
     } finally {
       setIsLoading(false);
       onClose();
@@ -111,23 +111,38 @@ export default function CreateReportDialog({
             />
 
             <div className="flex items-center justify-between">
-              <label htmlFor="includePreview">Include Preview</label>
+              <label htmlFor="includePreview">
+                Include Preview
+                {includePreview && (
+                  <span className="ml-1 text-xs text-foreground opacity-80">
+                    (+10credit)
+                  </span>
+                )}
+              </label>
               <Switch
                 id="includePreview"
                 checked={includePreview}
                 onCheckedChange={setIncludePreview}
               />
             </div>
-            <div className="flex items-center justify-between">
+            {/* TODO: Uncomment this in future */}
+            {/* <div className="flex items-center justify-between">
               <label htmlFor="includePSI">Include PSI</label>
               <Switch
                 id="includePSI"
                 checked={includePSI}
                 onCheckedChange={setIncludePSI}
               />
-            </div>
+            </div> */}
             <div className="flex items-center justify-between">
-              <label htmlFor="includeAIAnalysis">Include AI Analysis</label>
+              <label htmlFor="includeAIAnalysis">
+                Include AI Analysis
+                {includeAIAnalysis && (
+                  <span className="ml-1 text-xs text-foreground opacity-80">
+                    (+20credit)
+                  </span>
+                )}
+              </label>
               <Switch
                 id="includeAIAnalysis"
                 checked={includeAIAnalysis}

@@ -17,6 +17,9 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { APP_NAME } from "@/config/app.config";
 import { sidebarItems, UpgradeCard } from "./Sidebar";
 import { signOut } from "next-auth/react";
+import { MagicWand02Icon } from "hugeicons-react";
+import { useState } from "react";
+import CreateReportDialog from "@/app/(auth-protected)/dashboard/_components/CreateReportDialog";
 
 export default function DashboardNavbar() {
   const myAccountItems = [
@@ -29,6 +32,9 @@ export default function DashboardNavbar() {
       href: "/dashboard/support",
     },
   ];
+
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+
   return (
     <>
       <header className="sticky top-0 z-50 flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -83,6 +89,19 @@ export default function DashboardNavbar() {
           </form>
         </div>
 
+        <div className="w-full flex justify-end">
+          <div className="relative">
+            <Button
+              onClick={() => setIsCreateDialogOpen(true)}
+              className="w-full sm:w-auto rounded-xl"
+              size="lg"
+            >
+              <MagicWand02Icon className="mr-2 h-5 w-5" />
+              Generate Report
+            </Button>
+          </div>
+        </div>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
@@ -113,6 +132,11 @@ export default function DashboardNavbar() {
         {/* Mode Toggle */}
         <ModeToggle />
       </header>
+
+      <CreateReportDialog
+        isOpen={isCreateDialogOpen}
+        onClose={() => setIsCreateDialogOpen(false)}
+      />
     </>
   );
 }
