@@ -122,10 +122,16 @@ export default function HowItWorksSection() {
               className="w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent flex items-end justify-center p-8">
-              <Button size="lg" variant="default" className="group rounded-xl">
-                Watch Demo (Coming Soon)
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <a href="https://youtu.be/fVrexnNbcVQ">
+                <Button
+                  size="lg"
+                  variant="default"
+                  className="group rounded-xl"
+                >
+                  Watch Demo
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </a>
             </div>
           </div>
         </motion.div>
