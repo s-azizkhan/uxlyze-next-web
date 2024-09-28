@@ -35,7 +35,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
           `}
             </Script>
           )}
-        {gtmId && <GoogleTagManager gtmId={gtmId} />}
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -45,6 +44,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <Toaster position="top-right" closeButton richColors />
           {children}
         </ThemeProvider>
+        {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </html>
     </SessionWrapper>
   );
