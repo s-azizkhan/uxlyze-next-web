@@ -74,6 +74,8 @@ const RegisterForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    values.email = values.email.toLowerCase();
+
     const response = await fetch(`/api/auth/register`, {
       method: "POST",
       body: JSON.stringify(values),
