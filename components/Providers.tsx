@@ -23,18 +23,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionWrapper>
       <html lang="en" className="scrollbar-none">
-        {process.env.NODE_ENV === "production" &&
-          process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
-            <Script id="clarity-script" strategy="afterInteractive">
-              {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");
-          `}
-            </Script>
-          )}
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -42,6 +30,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           <Toaster position="top-right" closeButton richColors />
+          {process.env.NODE_ENV === "production" &&
+            process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
+              <Script id="clarity-script">
+                {`
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");
+            `}
+              </Script>
+            )}
           {children}
         </ThemeProvider>
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
