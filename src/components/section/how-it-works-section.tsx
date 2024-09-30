@@ -122,7 +122,7 @@ export default function HowItWorksSection() {
               className="w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent flex items-end justify-center p-8">
-              <a href="https://youtu.be/fVrexnNbcVQ">
+              <a href="https://youtu.be/fVrexnNbcVQ" target="_blank">
                 <Button
                   size="lg"
                   variant="default"
