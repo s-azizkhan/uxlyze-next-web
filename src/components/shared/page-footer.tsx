@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { APP_NAME } from "@/config/app.config";
+import Image from "next/image";
 
 const footerContent = {
   tagline: "Revolutionize your UI/UX workflow with automated design analysis.",
@@ -81,6 +82,13 @@ export default function PageFooter() {
               transition={{ delay: 0.2 }}
             >
               <Link href="/" className="flex items-center">
+                <Image
+                  src={"/images/uxlyze-only-logo.svg"}
+                  alt="UXlyze logo"
+                  loading="lazy"
+                  width={50}
+                  height={50}
+                />
                 <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
                   {APP_NAME}
                 </span>

@@ -32,6 +32,7 @@ import {
   InvestigationIcon,
 } from "hugeicons-react";
 import { APP_NAME } from "@/config/app.config";
+import Image from "next/image";
 
 const navbarContent = {
   appName: APP_NAME,
@@ -91,8 +92,15 @@ const DesktopNavigation = () => {
       <div className="flex items-center gap-6">
         {/* Logo */}
         <Link href="/">
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-1 ">
             {/* TODO: add logo */}
+            <Image
+              src={"/images/uxlyze-only-logo.svg"}
+              alt="UXlyze logo"
+              loading="eager"
+              width={50}
+              height={50}
+            />
             <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
               {navbarContent.appName}
             </span>
@@ -170,7 +178,14 @@ const MobileNavigation = () => {
       <Link href="/">
         <div className="flex items-center gap-2">
           {/* TODO: add logo */}
-          <span className="text-xl font-bold">{navbarContent.appName}</span>
+          <Image
+            src={"/images/uxlyze-only-logo.svg"}
+            alt="UXlyze logo"
+            loading="eager"
+            width={50}
+            height={50}
+          />
+          {/* <span className="text-xl font-bold">{navbarContent.appName}</span> */}
         </div>
       </Link>
       <Link href={navbarContent.ctaButton.href}>
@@ -190,8 +205,15 @@ const MobileNavigation = () => {
           <SheetHeader>
             <SheetTitle>
               <Link href="/">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   {/* TODO: add logo */}
+                  <Image
+                    src={"/images/uxlyze-only-logo.svg"}
+                    alt="UXlyze logo"
+                    loading="lazy"
+                    width={50}
+                    height={50}
+                  />
                   <span className="text-xl font-bold">
                     {navbarContent.appName}
                   </span>
