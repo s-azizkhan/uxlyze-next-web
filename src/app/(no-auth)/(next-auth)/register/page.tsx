@@ -9,6 +9,7 @@ import {
 import { APP_NAME } from "@/config/app.config";
 import RegisterForm from "./Form";
 import { metaTitlePostFix } from "@/app/layout";
+import { Suspense } from "react";
 
 // metadata
 export const metadata = {
@@ -31,7 +32,9 @@ export default function RegisterPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <RegisterForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <RegisterForm />
+            </Suspense>
           </CardContent>
         </Card>
         <p className="text-center mt-8 text-gray-600">
