@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 // Define the schema
 const emailSchema = z.string().email("Invalid email address");
@@ -13,6 +14,7 @@ const emailSchema = z.string().email("Invalid email address");
 export default function WaitListForm() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,22 +29,24 @@ export default function WaitListForm() {
     }
 
     try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      router.push(`/register?email=${email}`);
 
-      const data = await response.json();
+      // const response = await fetch("/api/waitlist", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email }),
+      // });
 
-      if (data.success) {
-        toast.success(data.success);
-        setEmail("");
-      } else {
-        toast.error(data.error);
-      }
+      // const data = await response.json();
+
+      // if (data.success) {
+      //   toast.success(data.success);
+      //   setEmail("");
+      // } else {
+      //   toast.error(data.error);
+      // }
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
     } finally {

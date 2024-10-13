@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ContinueWithGoogleBtn from "@/components/continue-with-google-btn";
 import { useSession } from "next-auth/react";
 
@@ -55,6 +55,10 @@ const formSchema = z
 
 const RegisterForm = () => {
   const router = useRouter();
+
+  const qq = useSearchParams();
+
+  const qEmail = qq.get("email") as string;
 
   // get user from useSession
   const { data: session } = useSession();
@@ -125,6 +129,7 @@ const RegisterForm = () => {
               )}
             />
             <FormField
+              defaultValue={qEmail}
               control={form.control}
               name="email"
               render={({ field }) => (

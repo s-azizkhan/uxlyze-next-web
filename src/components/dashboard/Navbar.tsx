@@ -20,6 +20,7 @@ import { signOut } from "next-auth/react";
 import { MagicWand02Icon } from "hugeicons-react";
 import { useState } from "react";
 import CreateReportDialog from "@/app/(auth-protected)/dashboard/_components/CreateReportDialog";
+import Image from "next/image";
 
 export default function DashboardNavbar() {
   const myAccountItems = [
@@ -55,6 +56,13 @@ export default function DashboardNavbar() {
                 href="#"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
+                <Image
+                  src={"/images/uxlyze-only-logo.svg"}
+                  alt="UXlyze logo"
+                  loading="lazy"
+                  width={50}
+                  height={50}
+                />
                 {APP_NAME}
               </Link>
 

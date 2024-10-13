@@ -29,6 +29,7 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
 
 // TODO: show this card
 export function UpgradeCard() {
@@ -78,8 +79,15 @@ export default function DashboardSidebar() {
   return (
     <aside className="hidden md:flex flex-col border-r bg-white dark:bg-gray-900 transition-all ease-in-out duration-300 sticky top-0 h-screen shadow-md">
       <div className="flex h-16 items-center justify-center border-b px-6 lg:h-[60px]">
-        <Link href="/" className="flex items-center gap-2">
-          <IconAnalyze className="h-8 w-8 text-primary" />
+        <Link href="/" className="flex items-center gap-1">
+          {/* <IconAnalyze className="h-8 w-8 text-primary" /> */}
+          <Image
+            src={"/images/uxlyze-only-logo.svg"}
+            alt="UXlyze logo"
+            loading="lazy"
+            width={50}
+            height={50}
+          />
           <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-violet-500 text-transparent bg-clip-text">
             {APP_NAME}
           </span>
