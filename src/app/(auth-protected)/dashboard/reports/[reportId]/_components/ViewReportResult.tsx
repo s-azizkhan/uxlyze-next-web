@@ -109,10 +109,9 @@ export default function ViewReportResult({ reportId }: { reportId: string }) {
                       )}`}
                       styles={buildStyles({
                         textSize: "24px",
-                        pathColor: `rgba(255, 255, 255, ${
-                          reportData.resultData.result.geminiAnalysis
+                        pathColor: `rgba(255, 255, 255, ${reportData.resultData.result.geminiAnalysis
                             .total_score / 10
-                        })`,
+                          })`,
                         textColor: "#ffffff",
                         trailColor: "rgba(255, 255, 255, 0.2)",
                       })}
@@ -158,6 +157,19 @@ function CompletedStatusReport({
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        className="space-y-8"
+      >
+        {reportConfig.includeAIAnalysis && report.geminiAnalysis && (
+          <>
+            <IssuesAndSuggestions analysis={report.geminiAnalysis} />
+          </>
+        )}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
       >
@@ -195,11 +207,6 @@ function CompletedStatusReport({
         transition={{ delay: 0.6, duration: 0.5 }}
         className="space-y-8"
       >
-        {reportConfig.includeAIAnalysis && report.geminiAnalysis && (
-          <>
-            <IssuesAndSuggestions analysis={report.geminiAnalysis} />
-          </>
-        )}
         <NavigationAnalysis navigation={report.Navigation} />
         <SEOAnalysis seo={report.SEO} />
         <ColorUsageAnalysis colorUsage={report.ColorUsage} />

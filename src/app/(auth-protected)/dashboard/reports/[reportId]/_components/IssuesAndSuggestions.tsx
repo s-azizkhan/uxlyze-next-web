@@ -84,7 +84,7 @@ export default function IssuesAndSuggestions({
           <AlertCircle className="mr-2" size={20} /> Top Issues
         </h3>
         <ul className="list-none space-y-3">
-          {category?.issues?.slice(0, 3).map((issue, index) => (
+          {category?.issues ? category.issues.slice(0, 3).map((issue, index) => (
             <li
               key={index}
               className="flex items-start bg-red-50 p-3 rounded-md"
@@ -92,7 +92,15 @@ export default function IssuesAndSuggestions({
               <span className="text-red-500 mr-3 mt-1">•</span>
               <span className="text-sm">{issue.description}</span>
             </li>
-          ))}
+          )) : (
+            <li
+              key={'no-issue'}
+              className="flex items-center bg-green-50 p-3 rounded-md"
+            >
+              <span className="text-green-500 mr-3">•</span>
+              <span className="text-sm">{`No issues found, you're all set 🎉`}</span>
+            </li>
+          )}
         </ul>
       </div>
       <div>
@@ -100,7 +108,7 @@ export default function IssuesAndSuggestions({
           <Lightbulb className="mr-2" size={20} /> Key Suggestions
         </h3>
         <ul className="list-none space-y-3">
-          {category?.suggestions?.slice(0, 3).map((suggestion, index) => (
+          {category?.suggestions ? category?.suggestions?.slice(0, 3).map((suggestion, index) => (
             <li
               key={index}
               className="flex items-start bg-green-50 p-3 rounded-md"
@@ -108,7 +116,15 @@ export default function IssuesAndSuggestions({
               <span className="text-green-500 mr-3 mt-1">•</span>
               <span className="text-sm">{suggestion.description}</span>
             </li>
-          ))}
+          )) : (
+            <li
+              key={'no-suggestion'}
+              className="flex items-center bg-green-50 p-3 rounded-md"
+            >
+              <span className="text-green-500 mr-3">•</span>
+              <span className="text-sm">{"No suggestions found"}</span>
+            </li>
+          )}
         </ul>
       </div>
     </div>
