@@ -1,11 +1,10 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { IAiAnalysis, ICategoryAnalysis } from "@/types/ai-analysis-result";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { ChevronDown, ChevronUp, AlertCircle, Lightbulb } from "lucide-react";
+import { AlertCircle, Lightbulb } from "lucide-react";
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
   DialogContent,

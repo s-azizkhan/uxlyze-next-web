@@ -1,8 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Download, Edit2 } from "lucide-react";
-import { IAnalysisResult } from "@/types/analysis-result";
 import NavigationAnalysis from "./NavigationAnalysis";
 import SEOAnalysis from "./SEOAnalysis";
 import ColorUsageAnalysis from "./ColorUsageAnalysis";
@@ -14,9 +11,6 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import KeyMetricsCard from "./KeyMetricsCard";
 import { IReportWithResult, useReport } from "@/hooks/useReport";
-import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
-import { IconLoader, IconLoader2 } from "@tabler/icons-react";
 import PendingStatusReportCard from "./PendingStatusReportCard";
 import LoadingReportSkeletonUI from "./LoadingReportSkeletonUI";
 import NoReportFoundUI from "./NoReportFoundUI";

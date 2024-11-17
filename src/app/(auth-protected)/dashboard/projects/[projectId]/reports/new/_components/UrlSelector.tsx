@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ListStartIcon, SparkleIcon, SparklesIcon } from "lucide-react";
+import { SparklesIcon } from "lucide-react";
 
 interface UrlSelectorProps {
   urls: string[];

@@ -2,7 +2,7 @@
 import HeroSection from "../components/section/hero-section";
 import FeatureSection from "../components/section/feature-section";
 import TestimonialSection from "../components/section/testimonial-section";
-import PricingSection from "../components/section/pricing-section";
+// import PricingSection from "../components/section/pricing-section";
 import FaqSection from "../components/section/faq-section";
 import GenerateMenuCtaSection from "../components/section/generate-menu-cta-section";
 import PageNavbar from "@/components/shared/page-navbar";
@@ -21,7 +21,7 @@ export default function Home() {
         <HowItWorksSection />
         <FeatureSection />
         <TestimonialSection />
-        <PricingSection />
+        {/* <PricingSection /> */}
         <FaqSection />
         <GenerateMenuCtaSection />
       </main>

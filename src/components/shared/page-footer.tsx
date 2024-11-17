@@ -4,10 +4,14 @@ import Link from "next/link";
 import {
   FaApple,
   FaDiscord,
+  FaFacebook,
   FaGooglePlay,
+  FaInstagram,
+  FaLinkedin,
   FaRedditAlien,
   FaTelegramPlane,
   FaTwitter,
+  FaYoutube,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { APP_NAME } from "@/config/app.config";
@@ -62,7 +66,40 @@ const footerContent = {
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Cookie Policy", href: "/cookie-policy" },
   ],
-  socialIcons: [FaDiscord, FaRedditAlien, FaTwitter, FaTelegramPlane],
+  socialIcons: [
+    {
+      icon: FaDiscord,
+      href: "https://discord.gg/Re7B49H2Vp"
+    },
+    {
+      icon: FaRedditAlien,
+      href: "https://www.reddit.com/r/uxlyze"
+    },
+    {
+      icon: FaTwitter,
+      href: "https://x.com/uxlyze"
+    },
+    {
+      icon: FaTelegramPlane,
+      href: "https://t.me/uxlyze"
+    },
+    {
+      icon: FaYoutube,
+      href: "https://www.youtube.com/@uxlyze"
+    },
+    {
+      icon: FaFacebook,
+      href: "https://www.facebook.com/uxlyze"
+    },
+    {
+      icon: FaInstagram,
+      href: "https://www.instagram.com/uxlyze"
+    },
+    {
+      icon: FaLinkedin,
+      href: "https://www.linkedin.com/company/uxlyze"
+    }
+  ],
 };
 
 export default function PageFooter() {
@@ -166,9 +203,9 @@ export default function PageFooter() {
           <Separator className="my-10" />
           <div className="flex flex-col items-center mb-2">
             <div className="flex gap-4">
-              {footerContent.socialIcons.map((Icon, idx) => (
-                <Link key={idx} href="#">
-                  <Icon className="size-6 text-gray-500 dark:text-gray-400" />
+              {footerContent.socialIcons.map((socialIcon, idx) => (
+                <Link key={idx} href={socialIcon.href || "#"}>
+                  <socialIcon.icon className="size-6 text-gray-500 dark:text-gray-400" />
                 </Link>
               ))}
             </div>
