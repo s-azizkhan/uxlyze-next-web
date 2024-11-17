@@ -10,6 +10,7 @@ import { APP_NAME } from "@/config/app.config";
 import RegisterForm from "./Form";
 import { metaTitlePostFix } from "@/app/layout";
 import { Suspense } from "react";
+import WaitListForm from "@/components/shared/wait-list-form";
 
 // metadata
 export const metadata = {
@@ -24,7 +25,7 @@ export default function RegisterPage() {
         <Card className="mx-auto max-w-md w-full">
           <CardHeader className="text-center">
             <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary  to-purple-600 text-transparent bg-clip-text">
-              Register for {APP_NAME}
+              Join the waitlist for {APP_NAME}
             </CardTitle>
             <CardDescription className="text-lg mt-2">
               Be among the first to experience the advanced UI/UX analytics for
@@ -33,7 +34,8 @@ export default function RegisterPage() {
           </CardHeader>
           <CardContent>
             <Suspense fallback={<div>Loading...</div>}>
-              <RegisterForm />
+            {/* <RegisterForm /> */}
+              <WaitListForm />
             </Suspense>
           </CardContent>
         </Card>

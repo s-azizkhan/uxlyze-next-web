@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ILink, INavigationAnalysis } from "@/types/analysis-result";
-import { ExternalLink, Link, ChevronDown } from "lucide-react";
+import { ExternalLink, Link } from "lucide-react";
 import {
   Accordion,
   AccordionContent,

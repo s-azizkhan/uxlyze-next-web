@@ -1,4 +1,3 @@
-import { getProjectById } from "@/actions/project";
 import { metaTitlePostFix } from "@/app/layout";
 import ViewProject from "./_components/ViewProject";
 

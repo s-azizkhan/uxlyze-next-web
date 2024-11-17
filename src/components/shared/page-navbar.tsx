@@ -38,8 +38,8 @@ const navbarContent = {
   appName: APP_NAME,
   mainLinks: [
     { title: "Features", href: "/features" },
-    { title: "Pricing", href: "/pricing" },
-    { title: "Case Studies", href: "/case-studies" },
+    // { title: "Pricing", href: "/pricing" },
+    // { title: "Case Studies", href: "/case-studies" },
   ],
   resourcesMenu: [
     {
@@ -125,7 +125,7 @@ const DesktopNavigation = () => {
             </Link>
           ))}
           {/* Navigation Menu */}
-          <NavigationMenu>
+          <NavigationMenu className="hidden">
             <NavigationMenuList>
               {/* Resources Menu */}
               <NavigationMenuItem className="text-muted-foreground">

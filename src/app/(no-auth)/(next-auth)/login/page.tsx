@@ -10,6 +10,7 @@ import {
 import LoginForm from "./Form";
 import { APP_NAME } from "@/config/app.config";
 import { Suspense } from "react";
+import WaitListForm from "@/components/shared/wait-list-form";
 
 export default function LoginPage() {
   return (
@@ -29,7 +30,8 @@ export default function LoginPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <LoginForm />
+                {/* <LoginForm /> */}
+                <WaitListForm />
               </CardContent>
             </Card>
           </Suspense>
