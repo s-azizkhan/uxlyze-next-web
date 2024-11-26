@@ -19,11 +19,12 @@ export default function ScreenshotGallery({
             <CardContent>
               {url && url !== "N/A" ? (
                 <Image
+                  onClick={() => url.endsWith(".webp") ? window.open(`${SS_CDN_URL}/${url}`) : null}
                   src={`${url.endsWith(".webp") ? `${SS_CDN_URL}/${url}` : `data:image/png;base64,${url}`}`}
                   alt={`${key} screenshot`}
                   width={300}
                   height={200}
-                  className="w-full h-auto"
+                  className="w-full h-auto cursor-pointer"
                 />
               ) : (
                 <p>No screenshot available</p>

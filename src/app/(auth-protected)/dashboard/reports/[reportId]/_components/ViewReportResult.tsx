@@ -166,7 +166,7 @@ function CompletedStatusReport({
         transition={{ delay: 0.5, duration: 0.5 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
       >
-        {report.Readability !== "N/A" && <KeyMetricsCard
+        {report.Readability && report.Readability !== "N/A" && <KeyMetricsCard
           title="Mobile & Readability"
           data={{
             MobileFriendly: report.MobileFriendly,

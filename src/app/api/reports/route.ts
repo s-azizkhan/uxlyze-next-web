@@ -9,7 +9,7 @@ import {
   deductCreditForReport,
   getUserCredit,
 } from "@/actions/analysis-credit";
-import { addToAnalyzerServer } from "@/actions/report";
+import { addToAnalyzerLiteServer } from "@/actions/report"; // TODO:chnage back to normal server
 
 export async function POST(request: NextRequest) {
   try {
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         .set({ reportCount: sql`${project.reportCount} + 1` })
         .where(eq(projectsTable.id, projectId)),
       deductCreditForReport(currentUser.id, report.id, reportCost),
-      addToAnalyzerServer(report.id),
+      addToAnalyzerLiteServer(report.id),
     ]);
 
     return NextResponse.json(report, { status: 201 });

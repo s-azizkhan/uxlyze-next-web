@@ -9,3 +9,4 @@ export const REPORT_CREDIT_COST = {
 };
 export const ANALYZER_API_BASE = process.env.ANALYZER_API_BASE;
 export const SS_CDN_URL = process.env.NEXT_PUBLIC_SS_CDN_URL || "https://ss.uxlyze.com";
+export const ANALYZER_LITE_API_BASE = process.env.ANALYZER_LITE_API_BASE;
