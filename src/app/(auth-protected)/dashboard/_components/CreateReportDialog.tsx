@@ -35,9 +35,9 @@ export default function CreateReportDialog({
   const [projectId, setProjectId] = useState("");
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [includePreview, setIncludePreview] = useState(false);
+  const [includePreview, setIncludePreview] = useState(true);
   const [includePSI, setIncludePSI] = useState(false);
-  const [includeAIAnalysis, setIncludeAIAnalysis] = useState(false);
+  const [includeAIAnalysis, setIncludeAIAnalysis] = useState(true);
   const router = useRouter();
   const { data: projects } = useProjects();
 
