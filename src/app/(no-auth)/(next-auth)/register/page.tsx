@@ -10,7 +10,6 @@ import { APP_NAME } from "@/config/app.config";
 import RegisterForm from "./Form";
 import { metaTitlePostFix } from "@/app/layout";
 import { Suspense } from "react";
-import WaitListForm from "@/components/shared/wait-list-form";
 
 // metadata
 export const metadata = {
@@ -34,8 +33,7 @@ export default function RegisterPage() {
           </CardHeader>
           <CardContent>
             <Suspense fallback={<div>Loading...</div>}>
-            {/* <RegisterForm /> */}
-              <WaitListForm />
+              <RegisterForm />
             </Suspense>
           </CardContent>
         </Card>

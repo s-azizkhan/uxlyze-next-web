@@ -13,7 +13,7 @@ export default function ContactForm() {
 
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    // TODO: Implement form submission logics
   }
   return (
     <>

@@ -29,24 +29,24 @@ export default function WaitListForm() {
     }
 
     try {
-      // router.push(`/register?email=${email}`);
+      router.push(`/register?email=${email}`);
 
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      // const response = await fetch("/api/waitlist", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email }),
+      // });
 
-      const data = await response.json();
+      // const data = await response.json();
 
-      if (data.success) {
-        toast.success(data.success);
-        setEmail("");
-      } else {
-        toast.error(data.error);
-      }
+      // if (data.success) {
+      //   toast.success(data.success);
+      //   setEmail("");
+      // } else {
+      //   toast.error(data.error);
+      // }
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
     } finally {

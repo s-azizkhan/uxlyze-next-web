@@ -76,20 +76,20 @@ export default function IssuesAndSuggestions({
     );
   };
 
-  const renderCategoryContent = (category: ICategoryAnalysis) => (
-    <div className="mt-4 space-y-6">
+  const renderCategoryContent = (category: ICategoryAnalysis) => {
+    return (<div className="mt-4 space-y-6">
       <div>
         <h3 className="font-semibold mb-3 flex items-center text-lg">
           <AlertCircle className="mr-2" size={20} /> Top Issues
         </h3>
         <ul className="list-none space-y-3">
-          {category?.issues ? category.issues.slice(0, 3).map((issue, index) => (
+          {category?.issues ? category.issues.map((issue, index) => (
             <li
               key={index}
               className="flex items-start bg-red-50 p-3 rounded-md"
             >
               <span className="text-red-500 mr-3 mt-1">•</span>
-              <span className="text-sm">{issue.description}</span>
+              <span className="text-sm">{typeof issue === "string" ? issue : issue.description}</span>
             </li>
           )) : (
             <li
@@ -107,13 +107,13 @@ export default function IssuesAndSuggestions({
           <Lightbulb className="mr-2" size={20} /> Key Suggestions
         </h3>
         <ul className="list-none space-y-3">
-          {category?.suggestions ? category?.suggestions?.slice(0, 3).map((suggestion, index) => (
+          {category?.suggestions ? category?.suggestions?.map((suggestion, index) => (
             <li
               key={index}
               className="flex items-start bg-green-50 p-3 rounded-md"
             >
               <span className="text-green-500 mr-3 mt-1">•</span>
-              <span className="text-sm">{suggestion.description}</span>
+              <span className="text-sm">{typeof suggestion === "string" ? suggestion : suggestion.description}</span>
             </li>
           )) : (
             <li
@@ -126,8 +126,8 @@ export default function IssuesAndSuggestions({
           )}
         </ul>
       </div>
-    </div>
-  );
+    </div>)
+  };
 
   return (
     <section className="mb-12">

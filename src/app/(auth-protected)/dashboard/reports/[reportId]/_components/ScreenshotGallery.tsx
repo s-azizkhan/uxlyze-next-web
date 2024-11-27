@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SS_CDN_URL } from "@/config/app.config";
 import Image from "next/image";
 
 export default function ScreenshotGallery({
@@ -16,13 +17,14 @@ export default function ScreenshotGallery({
               <CardTitle>{key}</CardTitle>
             </CardHeader>
             <CardContent>
-              {url ? (
+              {url && url !== "N/A" ? (
                 <Image
-                  src={`data:image/png;base64,${url}`}
+                  onClick={() => url.endsWith(".webp") ? window.open(`${SS_CDN_URL}/${url}`) : null}
+                  src={`${url.endsWith(".webp") ? `${SS_CDN_URL}/${url}` : `data:image/png;base64,${url}`}`}
                   alt={`${key} screenshot`}
                   width={300}
                   height={200}
-                  className="w-full h-auto"
+                  className="w-full h-auto cursor-pointer"
                 />
               ) : (
                 <p>No screenshot available</p>

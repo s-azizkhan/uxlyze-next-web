@@ -27,8 +27,6 @@ export default function ViewReportResult({ reportId }: { reportId: string }) {
     return <NoReportFoundUI />;
   }
 
-  console.log({ reportData });
-
   return (
     <div className="min-h-screen">
       <motion.div
@@ -104,7 +102,7 @@ export default function ViewReportResult({ reportId }: { reportId: string }) {
                       styles={buildStyles({
                         textSize: "24px",
                         pathColor: `rgba(255, 255, 255, ${reportData.resultData.result.geminiAnalysis
-                            .total_score / 10
+                          .total_score / 10
                           })`,
                         textColor: "#ffffff",
                         trailColor: "rgba(255, 255, 255, 0.2)",
@@ -145,6 +143,7 @@ function CompletedStatusReport({
   if (!report) {
     return;
   }
+
   return (
     <>
       <ReportDisclaimer />
@@ -167,13 +166,13 @@ function CompletedStatusReport({
         transition={{ delay: 0.5, duration: 0.5 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
       >
-        <KeyMetricsCard
+        {report.Readability && report.Readability !== "N/A" && <KeyMetricsCard
           title="Mobile & Readability"
           data={{
             MobileFriendly: report.MobileFriendly,
             Readability: report.Readability,
           }}
-        />
+        /> }
 
         {reportConfig.includeAIAnalysis && report.geminiAnalysis && (
           <>
@@ -184,15 +183,17 @@ function CompletedStatusReport({
             />
           </>
         )}
-        <KeyMetricsCard
-          title="Navigation Overview"
-          data={{
-            TotalLinks: report.Navigation.totalLinks,
-            NavElements: report.Navigation.navElementCount,
-            InternalLinks: report.Navigation.internalLinksCount,
-            ExternalLinks: report.Navigation.externalLinksCount,
-          }}
-        />
+        {report.Navigation.totalLinks > 0 && (
+          <KeyMetricsCard
+            title="Navigation Overview"
+            data={{
+              TotalLinks: report.Navigation.totalLinks,
+              NavElements: report.Navigation.navElementCount,
+              InternalLinks: report.Navigation.internalLinksCount,
+              ExternalLinks: report.Navigation.externalLinksCount,
+            }}
+          />
+        )}
       </motion.div>
 
       <motion.div
@@ -201,10 +202,10 @@ function CompletedStatusReport({
         transition={{ delay: 0.6, duration: 0.5 }}
         className="space-y-8"
       >
-        <NavigationAnalysis navigation={report.Navigation} />
-        <SEOAnalysis seo={report.SEO} />
-        <ColorUsageAnalysis colorUsage={report.ColorUsage} />
-        <FontUsageAnalysis fontUsage={report.FontUsage} />
+        {report.Navigation.totalLinks > 0 && <NavigationAnalysis navigation={report.Navigation} />}
+        {Object.keys(report.SEO).length > 0 && <SEOAnalysis seo={report.SEO} />}
+        {report.ColorUsage.totalColors > 0 && <ColorUsageAnalysis colorUsage={report.ColorUsage} />}
+        {report.FontUsage.totalFonts > 0 && <FontUsageAnalysis fontUsage={report.FontUsage} />}
 
         {reportConfig.includePreview && (
           <ScreenshotGallery screenshots={report.Screenshots} />

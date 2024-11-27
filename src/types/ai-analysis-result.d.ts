@@ -11,8 +11,8 @@ export interface ISuggestion {
 
 export interface ICategoryAnalysis {
   score: number;
-  issues: Issue[];
-  suggestions: Suggestion[];
+  issues: IIssue[] | string[];
+  suggestions: ISuggestion[] | string[];
 }
 
 export interface IColorScheme {
@@ -26,12 +26,12 @@ export interface IAiAnalysis {
   website_category: string;
   website_category_score: number;
   color_scheme: ColorScheme;
-  usability: CategoryAnalysis;
-  visual_design: CategoryAnalysis;
-  typography: CategoryAnalysis;
-  cta_design: CategoryAnalysis;
-  navigation: CategoryAnalysis;
-  accessibility: CategoryAnalysis;
-  user_flow: CategoryAnalysis;
-  interactivity: CategoryAnalysis;
+  usability: ICategoryAnalysis;
+  visual_design: ICategoryAnalysis;
+  typography: ICategoryAnalysis;
+  cta_design: ICategoryAnalysis;
+  navigation: ICategoryAnalysis;
+  accessibility: ICategoryAnalysis;
+  user_flow: ICategoryAnalysis;
+  interactivity: ICategoryAnalysis;
 }
