@@ -43,6 +43,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // check is URL is valid and accessible
+    try {
+      const response: Response = await fetch(url);
+      if (!response.ok || response.status !== 200) {
+        console.error("Invalid URL to generate report:", url);
+        return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
+      }
+    } catch (error) {
+      return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
+    }
     const reportCost = calculateCreditCost({
       includePreview,
       includePSI,
