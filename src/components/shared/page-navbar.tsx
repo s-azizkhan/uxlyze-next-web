@@ -38,6 +38,8 @@ const navbarContent = {
   appName: APP_NAME,
   mainLinks: [
     { title: "Features", href: "/features" },
+    { title: "Login", href: "/login" },
+    { title: "Register", href: "/register" },
     // { title: "Pricing", href: "/pricing" },
     // { title: "Case Studies", href: "/case-studies" },
   ],
@@ -111,19 +113,6 @@ const DesktopNavigation = () => {
       <div className="flex items-center gap-2">
         {/* Navigation Links */}
         <div className="flex items-center gap-4">
-          {navbarContent.mainLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className={cn(
-                "text-muted-foreground",
-                navigationMenuTriggerStyle,
-                buttonVariants({ variant: "ghost" })
-              )}
-            >
-              {link.title}
-            </Link>
-          ))}
           {/* Navigation Menu */}
           <NavigationMenu className="hidden">
             <NavigationMenuList>
@@ -157,6 +146,19 @@ const DesktopNavigation = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          {navbarContent.mainLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              className={cn(
+                "text-muted-foreground underline-offset-4 hover:underline hover:animate-shimmer",
+                navigationMenuTriggerStyle,
+                buttonVariants({ variant: "ghost" })
+              )}
+            >
+              {link.title}
+            </Link>
+          ))}
         </div>
         <Link href={navbarContent.ctaButton.href}>
           <Button>

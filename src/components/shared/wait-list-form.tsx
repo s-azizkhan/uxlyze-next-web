@@ -67,7 +67,7 @@ export default function WaitListForm() {
                 id="email"
                 className="w-full p-2 border-none focus:outline-none"
                 type="email"
-                placeholder="Your email"
+                placeholder="Enter your email to get access to AI-powered UI/UX analysis and more features"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -78,13 +78,13 @@ export default function WaitListForm() {
 
           <div>
             <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? "Submitting..." : "Join The Waitlist"}
-              <ArrowRight01Icon className="ml-2 size-4 sm:size-5" />
+              {isLoading ? "Submitting..." : "Sign Up"}
+              <ArrowRight01Icon className="ml-2 size-4 sm:size-5 hover:animate-pulse" />
             </Button>
           </div>
 
           <p className="text-xs mt-1 text-gray-500 dark:text-gray-300 text-center">
-            Join the waitlist to get access to the AI menu and more features{" "}
+          Be one of the first to experience the future of design and development, Join the uxlyze to get access to the AI UI&Ux analysis and more features{" "}
             <span className="font-bold">
               without any cost for the first 100 users.
             </span>
